@@ -1,0 +1,1761 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AdminSiteUrl" xml:space="preserve">
+    <value>Admin Site URL</value>
+  </data>
+  <data name="CreateListItemMethodName" xml:space="preserve">
+    <value>Create List Item</value>
+  </data>
+  <data name="DefaultLocaleId" xml:space="preserve">
+    <value>Default Locale ID</value>
+  </data>
+  <data name="DefaultTerm" xml:space="preserve">
+    <value>Default Term</value>
+  </data>
+  <data name="DescribeSubsites" xml:space="preserve">
+    <value>Describe sub sites</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="DestinationFolder" xml:space="preserve">
+    <value>Destination Folder</value>
+  </data>
+  <data name="DestinationLibrary" xml:space="preserve">
+    <value>Destination Library</value>
+  </data>
+  <data name="DestinationList" xml:space="preserve">
+    <value>Destination List</value>
+  </data>
+  <data name="DestinationSiteUrl" xml:space="preserve">
+    <value>Destination Site URL</value>
+  </data>
+  <data name="Dynamic" xml:space="preserve">
+    <value>Dynamic</value>
+  </data>
+  <data name="ErrorNoResult" xml:space="preserve">
+    <value>No matching results were found.</value>
+  </data>
+  <data name="error_AtLeastOneItemIdentifier" xml:space="preserve">
+    <value>At least one item identifier needs to be specified.</value>
+  </data>
+  <data name="error_ContentTypesApprovalTypeNotFound" xml:space="preserve">
+    <value>The content approval type "{0}" was not found.</value>
+  </data>
+  <data name="error_ContextInitializationFailed" xml:space="preserve">
+    <value>Failed to initialize the Context:</value>
+  </data>
+  <data name="error_DocSetNotFound" xml:space="preserve">
+    <value>Document Set '{0}' not found.</value>
+  </data>
+  <data name="error_ErrorDetails" xml:space="preserve">
+    <value>Error Details: </value>
+  </data>
+  <data name="error_EventIdNotInCorrectFormat" xml:space="preserve">
+    <value>Event ID not in correct format</value>
+  </data>
+  <data name="error_ExecuteFailed" xml:space="preserve">
+    <value>Error occurred trying to Execute ({0}) - {1}</value>
+  </data>
+  <data name="error_FailedWithSpaceAndColon" xml:space="preserve">
+    <value> failed:</value>
+  </data>
+  <data name="error_FieldCreatorNotFound" xml:space="preserve">
+    <value>Unable to find creator for field {0}.</value>
+  </data>
+  <data name="error_FieldLookupListNotFound" xml:space="preserve">
+    <value>Field {0} has a dependency on a lookup list that could not be found</value>
+  </data>
+  <data name="error_FieldNotConfiguredException" xml:space="preserve">
+    <value>Field {0} was not configured against SharePoint client version {1}.</value>
+  </data>
+  <data name="error_InvalidAuthenticationMode" xml:space="preserve">
+    <value>Invalid authentication mode. OAuth is a requirement for this version of SharePoint.</value>
+  </data>
+  <data name="error_InvalidFimeName" xml:space="preserve">
+    <value>New Name cannot be null or empty.</value>
+  </data>
+  <data name="error_LibraryWithIdNotFound" xml:space="preserve">
+    <value>Document Library with Id {0} does not exist at site with URL {1}</value>
+  </data>
+  <data name="error_LibraryWithTitleNotFound" xml:space="preserve">
+    <value>Document Library {0} does not exist at site with URL {1}</value>
+  </data>
+  <data name="error_ListItemIdNotValid" xml:space="preserve">
+    <value>The specified item ID is not in the correct format.</value>
+  </data>
+  <data name="error_ListNotSupported" xml:space="preserve">
+    <value>The template for list {0} is not supported.</value>
+  </data>
+  <data name="error_MethodName" xml:space="preserve">
+    <value>Method: {0}</value>
+  </data>
+  <data name="error_MethodNotSet" xml:space="preserve">
+    <value>The Method you are trying to use has not been set to an instance of an object.</value>
+  </data>
+  <data name="error_NumericValueNotInExpectedRange" xml:space="preserve">
+    <value>The value supplied falls outside the range of valid numbers.</value>
+  </data>
+  <data name="error_PagingCalculationException" xml:space="preserve">
+    <value>An error has occured calculating the paging position for list: {0}</value>
+  </data>
+  <data name="error_ServiceObjCreationFailed" xml:space="preserve">
+    <value>Error occurred trying to create the service object ({0}).</value>
+  </data>
+  <data name="error_ServiceObjectNotSet" xml:space="preserve">
+    <value>The Service Object you are trying to use has not been set to an instance of an object.</value>
+  </data>
+  <data name="error_ServiceObjRetrieval" xml:space="preserve">
+    <value>Unable to retrieval ServiceObject for ServiceObject XML</value>
+  </data>
+  <data name="error_SharePointClientHostServerConfigError" xml:space="preserve">
+    <value>Exception occurred during configuration of SharePoint client</value>
+  </data>
+  <data name="error_SpecifyAtLeastOne" xml:space="preserve">
+    <value>Specify at least one input value.</value>
+  </data>
+  <data name="error_SpecifyRootSiteURL" xml:space="preserve">
+    <value>Unable to create service instance for a sub site.  You need to specify the root site URL of the site collection service objects will be created for sub sites if the "Describe sub sites" service key is set to true.</value>
+  </data>
+  <data name="error_TermStoreNotFound" xml:space="preserve">
+    <value>The Term Store {0} could not be found.</value>
+  </data>
+  <data name="error_TextValueNotInExpectedRange" xml:space="preserve">
+    <value>The {0} property cannot contain more than {1} characters.</value>
+  </data>
+  <data name="error_UndescribedFieldsException" xml:space="preserve">
+    <value>Unknown fields were found during describe. No of Fields: {0}</value>
+  </data>
+  <data name="error_UnhandledSharePointVersion" xml:space="preserve">
+    <value>Unhandled SharePoint Version: {0}</value>
+  </data>
+  <data name="error_Url" xml:space="preserve">
+    <value>URL: {0}</value>
+  </data>
+  <data name="error_Username" xml:space="preserve">
+    <value>Username: {0}</value>
+  </data>
+  <data name="error_UserOrGroupWithIdNotFound" xml:space="preserve">
+    <value>The user or group with id {0} could not be found.</value>
+  </data>
+  <data name="error_UserOrGroupWithNameNotFound" xml:space="preserve">
+    <value>The user or group {0} could not be found.</value>
+  </data>
+  <data name="error_XmlConfigParse" xml:space="preserve">
+    <value>Invalid xml configuration format.</value>
+  </data>
+  <data name="ExcludedFields" xml:space="preserve">
+    <value>Excluded Fields</value>
+  </data>
+  <data name="ExcludedLists" xml:space="preserve">
+    <value>Excluded Lists</value>
+  </data>
+  <data name="GetAllTermsInTermSet" xml:space="preserve">
+    <value>Get All Terms In Term Set</value>
+  </data>
+  <data name="GetTermsInTerm" xml:space="preserve">
+    <value>Get Terms In Term</value>
+  </data>
+  <data name="GetTermsInTermSet" xml:space="preserve">
+    <value>Get Terms In Term Set</value>
+  </data>
+  <data name="GetTermStore" xml:space="preserve">
+    <value>Get Term Store</value>
+  </data>
+  <data name="GetTermStores" xml:space="preserve">
+    <value>Get Term Stores</value>
+  </data>
+  <data name="HasChildTerms" xml:space="preserve">
+    <value>Has Child Terms</value>
+  </data>
+  <data name="IncludedFields" xml:space="preserve">
+    <value>Included Fields</value>
+  </data>
+  <data name="IncludedLists" xml:space="preserve">
+    <value>Included Lists</value>
+  </data>
+  <data name="IncludeHiddenLibraries" xml:space="preserve">
+    <value>Include Hidden Libraries</value>
+  </data>
+  <data name="IncludeHiddenLibraryFields" xml:space="preserve">
+    <value>Include Hidden Fields in Libraries</value>
+  </data>
+  <data name="IncludeHiddenListFields" xml:space="preserve">
+    <value>Include Hidden Fields in Lists</value>
+  </data>
+  <data name="IncludeHiddenLists" xml:space="preserve">
+    <value>Include Hidden Lists</value>
+  </data>
+  <data name="Invalid" xml:space="preserve">
+    <value>invalid</value>
+  </data>
+  <data name="Label" xml:space="preserve">
+    <value>Label</value>
+  </data>
+  <data name="label_AddAttachment" xml:space="preserve">
+    <value>Add Attachment</value>
+  </data>
+  <data name="label_AddedBy" xml:space="preserve">
+    <value>Added By</value>
+  </data>
+  <data name="label_AddGroupToRole" xml:space="preserve">
+    <value>Add Group To Role</value>
+  </data>
+  <data name="label_AddUserToGroup" xml:space="preserve">
+    <value>Add User To Group</value>
+  </data>
+  <data name="label_AddUserToRole" xml:space="preserve">
+    <value>Add User To Role</value>
+  </data>
+  <data name="label_AllowContentTypes" xml:space="preserve">
+    <value>Allow Content Types</value>
+  </data>
+  <data name="label_AllowMembersEditMembership" xml:space="preserve">
+    <value>Allow Members Edit Membership</value>
+  </data>
+  <data name="label_AllowRequestToJoin" xml:space="preserve">
+    <value>Allow Request To Join</value>
+  </data>
+  <data name="label_AllowsFolderCreation" xml:space="preserve">
+    <value>AllowsFolderCreation</value>
+  </data>
+  <data name="label_ApproveContent" xml:space="preserve">
+    <value>Approve Content</value>
+  </data>
+  <data name="label_ApproveContentById" xml:space="preserve">
+    <value>Approve Content By ID</value>
+  </data>
+  <data name="label_AttachmentLink" xml:space="preserve">
+    <value>Attachment Link</value>
+  </data>
+  <data name="label_AutoAcceptRequestToJoin" xml:space="preserve">
+    <value>Auto Accept Request To Join</value>
+  </data>
+  <data name="label_AvailableForTagging" xml:space="preserve">
+    <value>Available for Tagging</value>
+  </data>
+  <data name="label_BasePermissions" xml:space="preserve">
+    <value>Base Permissions</value>
+  </data>
+  <data name="label_BaseType" xml:space="preserve">
+    <value>List Base Type</value>
+  </data>
+  <data name="label_BaseTypeId" xml:space="preserve">
+    <value>Base Type ID</value>
+  </data>
+  <data name="label_CanCurrentUserEditMembership" xml:space="preserve">
+    <value>Can Current User Edit Membership</value>
+  </data>
+  <data name="label_CanCurrentUserManageGroup" xml:space="preserve">
+    <value>Can Current User Manage Group</value>
+  </data>
+  <data name="label_CanCurrentUserViewMembership" xml:space="preserve">
+    <value>Can Current User View Membership</value>
+  </data>
+  <data name="label_CategoryId" xml:space="preserve">
+    <value>Category Id</value>
+  </data>
+  <data name="label_CheckInAfterUpload" xml:space="preserve">
+    <value>Check in document after upload</value>
+  </data>
+  <data name="label_CheckInDocument" xml:space="preserve">
+    <value>Check In Document</value>
+  </data>
+  <data name="label_CheckInDocumentById" xml:space="preserve">
+    <value>Check In Document By ID</value>
+  </data>
+  <data name="label_CheckInMajorVersionPublish" xml:space="preserve">
+    <value>Check In Major Version (publish)</value>
+  </data>
+  <data name="label_CheckInMajorVersionPublishById" xml:space="preserve">
+    <value>Check In Major Version By ID (publish)</value>
+  </data>
+  <data name="label_CheckInMinorVersion" xml:space="preserve">
+    <value>Check In Minor Version</value>
+  </data>
+  <data name="label_CheckInMinorVersionDraft" xml:space="preserve">
+    <value>Check In Minor Version (draft)</value>
+  </data>
+  <data name="label_CheckInMinorVersionDraftById" xml:space="preserve">
+    <value>Check In Minor Version By ID (draft)</value>
+  </data>
+  <data name="label_CheckOutDocument" xml:space="preserve">
+    <value>Check Out Document</value>
+  </data>
+  <data name="label_CheckOutDocumentById" xml:space="preserve">
+    <value>Check Out Document By ID</value>
+  </data>
+  <data name="label_Choices" xml:space="preserve">
+    <value>Choices</value>
+  </data>
+  <data name="label_Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="label_ContentTypeGroup" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="label_ContentTypesEnabled" xml:space="preserve">
+    <value>Content Types Enabled</value>
+  </data>
+  <data name="label_ContinueIfCheckedOut" xml:space="preserve">
+    <value>Continue If Checked Out</value>
+  </data>
+  <data name="label_ContinueIfLibraryNotFound" xml:space="preserve">
+    <value>Continue If Library Not Found</value>
+  </data>
+  <data name="label_ContinueIfListNotFound" xml:space="preserve">
+    <value>Continue If List Not Found</value>
+  </data>
+  <data name="label_ContinueIfSubSiteNotFound" xml:space="preserve">
+    <value>Continue If Sub Site Not Found</value>
+  </data>
+  <data name="label_CopyCalendarItem" xml:space="preserve">
+    <value>Copy Calendar Event</value>
+  </data>
+  <data name="label_CopyCalendarItemFrom" xml:space="preserve">
+    <value>Copy Calendar Event From</value>
+  </data>
+  <data name="label_CopyDocument" xml:space="preserve">
+    <value>Copy Document</value>
+  </data>
+  <data name="label_CopyDocumentById" xml:space="preserve">
+    <value>Copy Document By ID</value>
+  </data>
+  <data name="label_CopyDocumentFrom" xml:space="preserve">
+    <value>Copy Document From</value>
+  </data>
+  <data name="label_CopyDocumentSet" xml:space="preserve">
+    <value>Copy Document Set</value>
+  </data>
+  <data name="label_CopyDocumentSetById" xml:space="preserve">
+    <value>Copy Document Set By ID</value>
+  </data>
+  <data name="label_CopyFolder" xml:space="preserve">
+    <value>Copy Folder</value>
+  </data>
+  <data name="label_CopyListItem" xml:space="preserve">
+    <value>Copy List Item</value>
+  </data>
+  <data name="label_CopyListItemFrom" xml:space="preserve">
+    <value>Copy List Item From</value>
+  </data>
+  <data name="label_Creatable" xml:space="preserve">
+    <value>Creatable</value>
+  </data>
+  <data name="label_CreateCalendarItem" xml:space="preserve">
+    <value>Create Calendar Event</value>
+  </data>
+  <data name="label_Created" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="label_CreateDocumentSet" xml:space="preserve">
+    <value>Create Document Set</value>
+  </data>
+  <data name="label_CreateFolder" xml:space="preserve">
+    <value>Create Folder</value>
+  </data>
+  <data name="label_CreateGroup" xml:space="preserve">
+    <value>Create Group</value>
+  </data>
+  <data name="label_CreateLibrary" xml:space="preserve">
+    <value>Create Library</value>
+  </data>
+  <data name="label_CreateList" xml:space="preserve">
+    <value>Create List</value>
+  </data>
+  <data name="label_CreateListItem" xml:space="preserve">
+    <value>Create List Item</value>
+  </data>
+  <data name="label_CreateManagedSiteCollection" xml:space="preserve">
+    <value>Create Managed Site Collection</value>
+  </data>
+  <data name="label_CreateNewVersion" xml:space="preserve">
+    <value>Add as a new version to existing file</value>
+  </data>
+  <data name="label_CreateRole" xml:space="preserve">
+    <value>Create Role</value>
+  </data>
+  <data name="label_CreateSite" xml:space="preserve">
+    <value>Create Site</value>
+  </data>
+  <data name="label_DataSource" xml:space="preserve">
+    <value>Data Source</value>
+  </data>
+  <data name="label_DateAdded" xml:space="preserve">
+    <value>Date Added</value>
+  </data>
+  <data name="label_DefaultContentApprovalWorkflowId" xml:space="preserve">
+    <value>Default Content Approval Workflow ID</value>
+  </data>
+  <data name="label_DefaultContentType" xml:space="preserve">
+    <value>Default Content Type</value>
+  </data>
+  <data name="label_DefaultDisplayFormUrl" xml:space="preserve">
+    <value>Default Display Form URL</value>
+  </data>
+  <data name="label_DefaultEditFormUrl" xml:space="preserve">
+    <value>Default Edit Form URL</value>
+  </data>
+  <data name="label_DefaultFormula" xml:space="preserve">
+    <value>Default Formula</value>
+  </data>
+  <data name="label_DefaultNewFormUrl" xml:space="preserve">
+    <value>Default New Form URL</value>
+  </data>
+  <data name="label_DefaultValue" xml:space="preserve">
+    <value>Default Value</value>
+  </data>
+  <data name="label_DeleteAllVersions" xml:space="preserve">
+    <value>Delete All Versions</value>
+  </data>
+  <data name="label_DeleteCalendarItem" xml:space="preserve">
+    <value>Delete Calendar Event</value>
+  </data>
+  <data name="label_DeleteCheckedOutDocument" xml:space="preserve">
+    <value>Delete Checked Out Document</value>
+  </data>
+  <data name="label_DeleteDocument" xml:space="preserve">
+    <value>Delete Document</value>
+  </data>
+  <data name="label_DeleteDocumentById" xml:space="preserve">
+    <value>Delete Document By ID</value>
+  </data>
+  <data name="label_DeleteDocumentSet" xml:space="preserve">
+    <value>Delete Document Set</value>
+  </data>
+  <data name="label_DeleteDocumentSetById" xml:space="preserve">
+    <value>Delete Document Set By ID</value>
+  </data>
+  <data name="label_DeleteFolder" xml:space="preserve">
+    <value>Delete Folder</value>
+  </data>
+  <data name="label_DeleteGroup" xml:space="preserve">
+    <value>Delete Group</value>
+  </data>
+  <data name="label_DeleteGroupById" xml:space="preserve">
+    <value>Delete Group By ID</value>
+  </data>
+  <data name="label_DeleteLibrary" xml:space="preserve">
+    <value>Delete Library</value>
+  </data>
+  <data name="label_DeleteLibraryById" xml:space="preserve">
+    <value>Delete Library By ID</value>
+  </data>
+  <data name="label_DeleteList" xml:space="preserve">
+    <value>Delete List</value>
+  </data>
+  <data name="label_DeleteListById" xml:space="preserve">
+    <value>Delete List By ID</value>
+  </data>
+  <data name="label_DeleteListItem" xml:space="preserve">
+    <value>Delete List Item</value>
+  </data>
+  <data name="label_DeleteManagedSiteCollection" xml:space="preserve">
+    <value>Delete Managed Site Collection</value>
+  </data>
+  <data name="label_DeleteMinorVersions" xml:space="preserve">
+    <value>Delete Minor Versions</value>
+  </data>
+  <data name="label_DeleteRecycleBinItem" xml:space="preserve">
+    <value>Delete Item</value>
+  </data>
+  <data name="label_DeleteRecycleBinItems" xml:space="preserve">
+    <value>Delete Recycle Bin Items</value>
+  </data>
+  <data name="label_DeleteRole" xml:space="preserve">
+    <value>Delete Role</value>
+  </data>
+  <data name="label_DeleteRolePermission" xml:space="preserve">
+    <value>Delete Role Permission</value>
+  </data>
+  <data name="label_DeleteSite" xml:space="preserve">
+    <value>Delete Site</value>
+  </data>
+  <data name="label_DeleteSubSite" xml:space="preserve">
+    <value>Delete Subsite</value>
+  </data>
+  <data name="label_DeleteVersion" xml:space="preserve">
+    <value>Delete Version</value>
+  </data>
+  <data name="label_Desc" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="label_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="label_DiscardDocumentCheckOut" xml:space="preserve">
+    <value>Discard Document Check Out</value>
+  </data>
+  <data name="label_DiscardDocumentCheckOutById" xml:space="preserve">
+    <value>Discard Document Check Out By ID</value>
+  </data>
+  <data name="label_DisplayCategory" xml:space="preserve">
+    <value>Display Category</value>
+  </data>
+  <data name="label_DisplayFormUrl" xml:space="preserve">
+    <value>Display SmartForms Form URL</value>
+  </data>
+  <data name="label_DisplayName" xml:space="preserve">
+    <value>DisplayName</value>
+  </data>
+  <data name="label_DisplayOnParentQuickLaunch" xml:space="preserve">
+    <value>Display on Quick Launch of parent</value>
+  </data>
+  <data name="label_DisplayOnParentTopLinkBar" xml:space="preserve">
+    <value>Display on top link bar of parent</value>
+  </data>
+  <data name="label_DocumentSets" xml:space="preserve">
+    <value>Document Sets</value>
+  </data>
+  <data name="label_DocumentTemplateUrl" xml:space="preserve">
+    <value>Document Template URL</value>
+  </data>
+  <data name="label_DoNotAllowAccountForFallback" xml:space="preserve">
+    <value>Do Not Allow Account For Fallback</value>
+  </data>
+  <data name="label_DoNotAllowAccountForFallbackName" xml:space="preserve">
+    <value>Do Not Allow Account For Fallback Setting Name</value>
+  </data>
+  <data name="label_DoNotAllowAccountForFallbackValue" xml:space="preserve">
+    <value>Do Not Allow Account For Fallback Setting Value</value>
+  </data>
+  <data name="label_DraftVersionVisibility" xml:space="preserve">
+    <value>Draft Version Visibility</value>
+  </data>
+  <data name="label_EditFormUrl" xml:space="preserve">
+    <value>Edit SmartForms Form URL</value>
+  </data>
+  <data name="label_EditOrDisplayFormSmOMethodSystemName" xml:space="preserve">
+    <value>Edit Or Display Form SmartObject Method System Name</value>
+  </data>
+  <data name="label_EnableFolderCreation" xml:space="preserve">
+    <value>Enable Folder Creation</value>
+  </data>
+  <data name="label_EnableMinorVersions" xml:space="preserve">
+    <value>Enable Minor Versions</value>
+  </data>
+  <data name="label_EnableModeration" xml:space="preserve">
+    <value>Enable Moderation</value>
+  </data>
+  <data name="label_EnableVersioning" xml:space="preserve">
+    <value>Enable Versioning</value>
+  </data>
+  <data name="label_EnforceUniqueValues" xml:space="preserve">
+    <value>Enforce Unique Values</value>
+  </data>
+  <data name="label_EntityPropertyName" xml:space="preserve">
+    <value>EntityPropertyName</value>
+  </data>
+  <data name="label_Event" xml:space="preserve">
+    <value>Event</value>
+  </data>
+  <data name="label_EventReceiverName" xml:space="preserve">
+    <value>ReceiverName</value>
+  </data>
+  <data name="label_EventReceiverType" xml:space="preserve">
+    <value>EventReceiverType</value>
+  </data>
+  <data name="label_ExceptionDetails" xml:space="preserve">
+    <value>Exception Details: </value>
+  </data>
+  <data name="label_ExtraData" xml:space="preserve">
+    <value>Extra Data</value>
+  </data>
+  <data name="label_FeatureId" xml:space="preserve">
+    <value>Feature ID</value>
+  </data>
+  <data name="label_FieldID" xml:space="preserve">
+    <value>Field ID</value>
+  </data>
+  <data name="label_FieldInternalName" xml:space="preserve">
+    <value>Field Internal Name</value>
+  </data>
+  <data name="label_Fields" xml:space="preserve">
+    <value>Fields</value>
+  </data>
+  <data name="label_FieldSmoType" xml:space="preserve">
+    <value>Field SmartObject Type</value>
+  </data>
+  <data name="label_FieldTypeAsString" xml:space="preserve">
+    <value>Field Type As String</value>
+  </data>
+  <data name="label_FieldValueType" xml:space="preserve">
+    <value>FieldValueType</value>
+  </data>
+  <data name="label_File" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="label_FileLocation" xml:space="preserve">
+    <value>File Location</value>
+  </data>
+  <data name="label_Filterable" xml:space="preserve">
+    <value>Filterable</value>
+  </data>
+  <data name="label_Folder" xml:space="preserve">
+    <value>Folder</value>
+  </data>
+  <data name="label_FolderRecycleBinGuid" xml:space="preserve">
+    <value>Folder Recycle Bin Guid</value>
+  </data>
+  <data name="label_ForceCheckout" xml:space="preserve">
+    <value>Force Checkout</value>
+  </data>
+  <data name="label_Forms" xml:space="preserve">
+    <value>Forms</value>
+  </data>
+  <data name="label_FormsUrlXml" xml:space="preserve">
+    <value>Forms Url Xml</value>
+  </data>
+  <data name="label_FormTitle" xml:space="preserve">
+    <value>Form Title</value>
+  </data>
+  <data name="label_GetAttachment" xml:space="preserve">
+    <value>Get Attachment</value>
+  </data>
+  <data name="label_GetAttachments" xml:space="preserve">
+    <value>Get Attachments</value>
+  </data>
+  <data name="label_GetAttachmentsList" xml:space="preserve">
+    <value>Get Attachments List</value>
+  </data>
+  <data name="label_GetCalendarItemById" xml:space="preserve">
+    <value>Get Calendar Event By ID</value>
+  </data>
+  <data name="label_GetCalendarItemByName" xml:space="preserve">
+    <value>Get Calendar Event By Name</value>
+  </data>
+  <data name="label_GetCalendarItemByTitle" xml:space="preserve">
+    <value>Get Calendar Event By Title</value>
+  </data>
+  <data name="label_GetCalendarItems" xml:space="preserve">
+    <value>Get Calendar Events</value>
+  </data>
+  <data name="label_GetCalendarSeriesSingleItem" xml:space="preserve">
+    <value>Get Calendar Series Single Event</value>
+  </data>
+  <data name="label_GetContentTypes" xml:space="preserve">
+    <value>Get Content Types</value>
+  </data>
+  <data name="label_GetContentTypesByLibraryId" xml:space="preserve">
+    <value>Get Content Types By Library ID</value>
+  </data>
+  <data name="label_GetContentTypesByListId" xml:space="preserve">
+    <value>Get Content Types By List ID</value>
+  </data>
+  <data name="label_GetDefaultContentType" xml:space="preserve">
+    <value>Get Default Content Type</value>
+  </data>
+  <data name="label_GetDocument" xml:space="preserve">
+    <value>Get Document</value>
+  </data>
+  <data name="label_GetDocumentById" xml:space="preserve">
+    <value>Get Document By ID</value>
+  </data>
+  <data name="label_GetDocuments" xml:space="preserve">
+    <value>Get Documents</value>
+  </data>
+  <data name="label_GetDocumentSet" xml:space="preserve">
+    <value>Get Document Set</value>
+  </data>
+  <data name="label_GetDocumentSetById" xml:space="preserve">
+    <value>Get Document Set By ID</value>
+  </data>
+  <data name="label_GetDocumentSets" xml:space="preserve">
+    <value>Get Document Sets</value>
+  </data>
+  <data name="label_GetDocumentsInDocumentSet" xml:space="preserve">
+    <value>Get Documents in Document Set</value>
+  </data>
+  <data name="label_GetDocumentsInDocumentSetById" xml:space="preserve">
+    <value>Get Documents In Document Set By ID</value>
+  </data>
+  <data name="label_GetDocumentsMetadata" xml:space="preserve">
+    <value>Get Documents Metadata</value>
+  </data>
+  <data name="label_GetEventReceiver" xml:space="preserve">
+    <value>Get Event Receiver</value>
+  </data>
+  <data name="label_GetEventReceivers" xml:space="preserve">
+    <value>Get Event Receivers</value>
+  </data>
+  <data name="label_GetField" xml:space="preserve">
+    <value>Get Field</value>
+  </data>
+  <data name="label_GetFieldMetaData" xml:space="preserve">
+    <value>GetFieldMetaData</value>
+  </data>
+  <data name="label_GetFields" xml:space="preserve">
+    <value>Get Fields</value>
+  </data>
+  <data name="label_GetFolders" xml:space="preserve">
+    <value>Get Folders</value>
+  </data>
+  <data name="label_GetFormDetails" xml:space="preserve">
+    <value>Get Form Details</value>
+  </data>
+  <data name="label_GetFormTitle" xml:space="preserve">
+    <value>Get Form Title</value>
+  </data>
+  <data name="label_GetGroup" xml:space="preserve">
+    <value>Get Group</value>
+  </data>
+  <data name="label_GetGroupById" xml:space="preserve">
+    <value>Get Group By ID</value>
+  </data>
+  <data name="label_GetGroups" xml:space="preserve">
+    <value>Get Groups</value>
+  </data>
+  <data name="label_GetGroupsForUser" xml:space="preserve">
+    <value>Get Groups For User</value>
+  </data>
+  <data name="label_GetGroupTitlesByIds" xml:space="preserve">
+    <value>Get Group Titles By ID's</value>
+  </data>
+  <data name="label_GetK2ApplicationSettings" xml:space="preserve">
+    <value>Get K2 Application Settings</value>
+  </data>
+  <data name="label_GetK2FQNForSharePointGroup" xml:space="preserve">
+    <value>Get K2 FQN for SharePoint Groups</value>
+  </data>
+  <data name="label_GetK2FQNForSharePointUser" xml:space="preserve">
+    <value>Get K2 FQN for SharePoint user</value>
+  </data>
+  <data name="label_GetLibraries" xml:space="preserve">
+    <value>Get Libraries</value>
+  </data>
+  <data name="label_GetLibrary" xml:space="preserve">
+    <value>Get Library</value>
+  </data>
+  <data name="label_GetLibraryById" xml:space="preserve">
+    <value>Get Library By ID</value>
+  </data>
+  <data name="label_GetList" xml:space="preserve">
+    <value>Get List</value>
+  </data>
+  <data name="label_GetListById" xml:space="preserve">
+    <value>Get List By ID</value>
+  </data>
+  <data name="label_GetListByName" xml:space="preserve">
+    <value>Get List By Name</value>
+  </data>
+  <data name="label_GetListFormsUrl" xml:space="preserve">
+    <value>Get List Forms Url</value>
+  </data>
+  <data name="label_GetListItemById" xml:space="preserve">
+    <value>Get List Item By ID</value>
+  </data>
+  <data name="label_GetListItemByName" xml:space="preserve">
+    <value>Get List Item By Name</value>
+  </data>
+  <data name="label_GetListItemByTitle" xml:space="preserve">
+    <value>Get List Item By Title</value>
+  </data>
+  <data name="label_GetListItems" xml:space="preserve">
+    <value>Get List Items</value>
+  </data>
+  <data name="label_GetListRelationshipsForRefresh" xml:space="preserve">
+    <value>Get List Relationships for Refresh</value>
+  </data>
+  <data name="label_GetLists" xml:space="preserve">
+    <value>Get Lists</value>
+  </data>
+  <data name="label_GetListTemplate" xml:space="preserve">
+    <value>Get List Template</value>
+  </data>
+  <data name="label_GetListTemplates" xml:space="preserve">
+    <value>Get List Templates</value>
+  </data>
+  <data name="label_GetRecycleBinItem" xml:space="preserve">
+    <value>Get Recycle Bin Item</value>
+  </data>
+  <data name="label_GetRecycleBinItems" xml:space="preserve">
+    <value>Get Recycle Bin Items</value>
+  </data>
+  <data name="label_GetRole" xml:space="preserve">
+    <value>Get Role</value>
+  </data>
+  <data name="label_GetRoles" xml:space="preserve">
+    <value>Get Roles</value>
+  </data>
+  <data name="label_GetServiceObjectXml" xml:space="preserve">
+    <value>Get Service Object Xml</value>
+  </data>
+  <data name="label_GetSharePointSiteGroups" xml:space="preserve">
+    <value>Get SharePoint Site Groups</value>
+  </data>
+  <data name="label_GetSite" xml:space="preserve">
+    <value>Get Site</value>
+  </data>
+  <data name="label_GetSiteTemplate" xml:space="preserve">
+    <value>Get Site Template</value>
+  </data>
+  <data name="label_GetSiteTemplates" xml:space="preserve">
+    <value>Get Site Templates</value>
+  </data>
+  <data name="label_GetSmartFormsDetails" xml:space="preserve">
+    <value>Get Smart Forms Details</value>
+  </data>
+  <data name="label_GetSubSite" xml:space="preserve">
+    <value>Get Subsite</value>
+  </data>
+  <data name="label_GetSubSites" xml:space="preserve">
+    <value>Get Subsites</value>
+  </data>
+  <data name="label_GetTerm" xml:space="preserve">
+    <value>Get Term</value>
+  </data>
+  <data name="label_GetTermSet" xml:space="preserve">
+    <value>Get Term Set</value>
+  </data>
+  <data name="label_GetUnsupportedFields" xml:space="preserve">
+    <value>Get Unsupported Fields</value>
+  </data>
+  <data name="label_GetUser" xml:space="preserve">
+    <value>Get User</value>
+  </data>
+  <data name="label_GetUsers" xml:space="preserve">
+    <value>Get Users</value>
+  </data>
+  <data name="label_GetUsersByIds" xml:space="preserve">
+    <value>Get Users By ID's</value>
+  </data>
+  <data name="label_GetUsersForGroup" xml:space="preserve">
+    <value>Get Users for Group</value>
+  </data>
+  <data name="label_GetUsersForGroupById" xml:space="preserve">
+    <value>Get Users For Group By ID</value>
+  </data>
+  <data name="label_GetVersion" xml:space="preserve">
+    <value>Get Version</value>
+  </data>
+  <data name="label_GetVersions" xml:space="preserve">
+    <value>Get Versions</value>
+  </data>
+  <data name="label_Group" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="label_GroupId" xml:space="preserve">
+    <value>Group ID</value>
+  </data>
+  <data name="label_GroupIds" xml:space="preserve">
+    <value>Group ID's</value>
+  </data>
+  <data name="label_GroupTitle" xml:space="preserve">
+    <value>Group Title</value>
+  </data>
+  <data name="label_HasExternalDataSource" xml:space="preserve">
+    <value>Has External Data Source</value>
+  </data>
+  <data name="label_Hidden" xml:space="preserve">
+    <value>Hidden</value>
+  </data>
+  <data name="label_HostID" xml:space="preserve">
+    <value>HostID</value>
+  </data>
+  <data name="label_HostServerConnectionString" xml:space="preserve">
+    <value>Host Server Connection String</value>
+  </data>
+  <data name="label_Id" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="label_IgnoreConflicts" xml:space="preserve">
+    <value>Ignore Conflicts</value>
+  </data>
+  <data name="label_IgnoreEmptyPayLoad" xml:space="preserve">
+    <value>Ignore Empty Payload</value>
+  </data>
+  <data name="label_IgnoreIfExist" xml:space="preserve">
+    <value>Ignore if Exist</value>
+  </data>
+  <data name="label_IgnoreMissingDocument" xml:space="preserve">
+    <value>Ignore Missing Document</value>
+  </data>
+  <data name="label_IgnoreMissingItem" xml:space="preserve">
+    <value>Ignore Missing Item</value>
+  </data>
+  <data name="label_ImageUrl" xml:space="preserve">
+    <value>Image URL</value>
+  </data>
+  <data name="label_IncludeFolderContentType" xml:space="preserve">
+    <value>Include Folder Content Type</value>
+  </data>
+  <data name="label_IncludeHiddenContentTypes" xml:space="preserve">
+    <value>Include Hidden Content Types</value>
+  </data>
+  <data name="label_Indexed" xml:space="preserve">
+    <value>Indexed</value>
+  </data>
+  <data name="label_InGroup" xml:space="preserve">
+    <value>InGroup</value>
+  </data>
+  <data name="label_InheritPermissions" xml:space="preserve">
+    <value>Inherit Permissions</value>
+  </data>
+  <data name="label_InternalName" xml:space="preserve">
+    <value>Internal Name</value>
+  </data>
+  <data name="label_IsApplicationList" xml:space="preserve">
+    <value>Is Application List</value>
+  </data>
+  <data name="label_IsCatalog" xml:space="preserve">
+    <value>IsCatalog</value>
+  </data>
+  <data name="label_IsCustomTemplate" xml:space="preserve">
+    <value>IsCustomTemplate</value>
+  </data>
+  <data name="label_IsLibraryTemplate" xml:space="preserve">
+    <value>Is Library Template</value>
+  </data>
+  <data name="label_IsSiteAssetsLibrary" xml:space="preserve">
+    <value>Is Site Assets Library</value>
+  </data>
+  <data name="label_IsUserInAnyOneGroupDesc" xml:space="preserve">
+    <value>Is User In Any One Group</value>
+  </data>
+  <data name="label_Is_Supported" xml:space="preserve">
+    <value>Is Supported</value>
+  </data>
+  <data name="label_ItemCount" xml:space="preserve">
+    <value>ItemCount</value>
+  </data>
+  <data name="label_K2Administrators" xml:space="preserve">
+    <value>Administrators</value>
+  </data>
+  <data name="label_K2AdministratorsName" xml:space="preserve">
+    <value>Administrators Name</value>
+  </data>
+  <data name="label_K2AdministratorsValue" xml:space="preserve">
+    <value>Administrators Value</value>
+  </data>
+  <data name="label_K2Application" xml:space="preserve">
+    <value>K2 Application</value>
+  </data>
+  <data name="label_K2ApplicationFormsBaseURL" xml:space="preserve">
+    <value>K2 Application Forms Base URL</value>
+  </data>
+  <data name="label_K2ApplicationFullControl" xml:space="preserve">
+    <value>K2 Application Full Control</value>
+  </data>
+  <data name="label_K2FQN" xml:space="preserve">
+    <value>K2FQN</value>
+  </data>
+  <data name="label_K2Label" xml:space="preserve">
+    <value>K2 Label</value>
+  </data>
+  <data name="label_LastItemDeletedDate" xml:space="preserve">
+    <value>Last Item Deleted Date</value>
+  </data>
+  <data name="label_LastItemModifiedDate" xml:space="preserve">
+    <value>Last Item Modified Date</value>
+  </data>
+  <data name="label_Libraries" xml:space="preserve">
+    <value>Libraries</value>
+  </data>
+  <data name="label_Library" xml:space="preserve">
+    <value>Library</value>
+  </data>
+  <data name="label_List" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="label_ListAttachmentsEnabled" xml:space="preserve">
+    <value>List Attachments Enabled</value>
+  </data>
+  <data name="label_ListContentTypeId" xml:space="preserve">
+    <value>Content Type ID</value>
+  </data>
+  <data name="label_ListContentTypeName" xml:space="preserve">
+    <value>Content Type Name</value>
+  </data>
+  <data name="label_ListId" xml:space="preserve">
+    <value>List ID</value>
+  </data>
+  <data name="label_ListIsDefaultContentType" xml:space="preserve">
+    <value>Is Default Content Type</value>
+  </data>
+  <data name="label_ListItemId" xml:space="preserve">
+    <value>List Item ID</value>
+  </data>
+  <data name="label_ListRelationshipType" xml:space="preserve">
+    <value>Relationship Type</value>
+  </data>
+  <data name="label_Lists" xml:space="preserve">
+    <value>Lists</value>
+  </data>
+  <data name="label_ListServerRelativeUrl" xml:space="preserve">
+    <value>List Server Relative URL</value>
+  </data>
+  <data name="label_ListTemplate" xml:space="preserve">
+    <value>List Template</value>
+  </data>
+  <data name="label_ListTemplateId" xml:space="preserve">
+    <value>List Template ID</value>
+  </data>
+  <data name="label_ListTemplateTypeKind" xml:space="preserve">
+    <value>ListTemplateTypeKind</value>
+  </data>
+  <data name="label_LoadActionMethod" xml:space="preserve">
+    <value>Load Action Method</value>
+  </data>
+  <data name="label_LocaleId" xml:space="preserve">
+    <value>Locale ID</value>
+  </data>
+  <data name="label_ManageK2ApplicationForms" xml:space="preserve">
+    <value>Manage K2 Application Forms</value>
+  </data>
+  <data name="label_ManageK2ApplicationSettings" xml:space="preserve">
+    <value>Manage K2 Application Settings</value>
+  </data>
+  <data name="label_ManagementServiceFolder" xml:space="preserve">
+    <value>Management</value>
+  </data>
+  <data name="label_MetaDataXml" xml:space="preserve">
+    <value>Metadata XML</value>
+  </data>
+  <data name="label_MethodNamingCreate" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="label_MethodNamingListItem" xml:space="preserve">
+    <value>List Item</value>
+  </data>
+  <data name="label_MethodNamingUpdate" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="label_MethodNamingUpload" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="label_MoveCalendarItem" xml:space="preserve">
+    <value>Move Calendar Event</value>
+  </data>
+  <data name="label_MoveCalendarItemFrom" xml:space="preserve">
+    <value>Move Calendar Event From</value>
+  </data>
+  <data name="label_MoveCheckedOutDocument" xml:space="preserve">
+    <value>Move Checked Out Document</value>
+  </data>
+  <data name="label_MoveDocument" xml:space="preserve">
+    <value>Move Document</value>
+  </data>
+  <data name="label_MoveDocumentById" xml:space="preserve">
+    <value>Move Document By ID</value>
+  </data>
+  <data name="label_MoveDocumentFrom" xml:space="preserve">
+    <value>Move Document From</value>
+  </data>
+  <data name="label_MoveDocumentSet" xml:space="preserve">
+    <value>Move Document Set</value>
+  </data>
+  <data name="label_MoveDocumentSetById" xml:space="preserve">
+    <value>Move Document Set By ID</value>
+  </data>
+  <data name="label_MoveFolder" xml:space="preserve">
+    <value>Move Folder</value>
+  </data>
+  <data name="label_MoveListItem" xml:space="preserve">
+    <value>Move List Item</value>
+  </data>
+  <data name="label_MoveListItemFrom" xml:space="preserve">
+    <value>Move List Item From</value>
+  </data>
+  <data name="label_MultipleDataList" xml:space="preserve">
+    <value>Multiple Data List</value>
+  </data>
+  <data name="label_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="label_NameProp" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="label_NewFormSmOMethodSystemName" xml:space="preserve">
+    <value>New Form SmartObject Method System Name</value>
+  </data>
+  <data name="label_NewFormUrl" xml:space="preserve">
+    <value>New SmartForms Form URL</value>
+  </data>
+  <data name="label_NewName" xml:space="preserve">
+    <value>New Name</value>
+  </data>
+  <data name="label_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="label_NoCrawl" xml:space="preserve">
+    <value>No Crawl</value>
+  </data>
+  <data name="label_OnlyAllowMembersViewMembership" xml:space="preserve">
+    <value>Only Allow Members View Membership</value>
+  </data>
+  <data name="label_OnQuickLaunch" xml:space="preserve">
+    <value>OnQuickLaunch</value>
+  </data>
+  <data name="label_Order" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="label_OverwriteCurrentMinorVersion" xml:space="preserve">
+    <value>Overwrite Current Minor Version</value>
+  </data>
+  <data name="label_OverwriteExistingDocument" xml:space="preserve">
+    <value>Overwrite Existing Document</value>
+  </data>
+  <data name="label_OverwriteExistingFile" xml:space="preserve">
+    <value>Overwrite Existing File</value>
+  </data>
+  <data name="label_OverwriteOrNewVersion" xml:space="preserve">
+    <value>Overwrite or Add new Version</value>
+  </data>
+  <data name="label_Owner" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="label_OwnerEmail" xml:space="preserve">
+    <value>Owner Email</value>
+  </data>
+  <data name="label_OwnerLogin" xml:space="preserve">
+    <value>Owner Login</value>
+  </data>
+  <data name="label_OwnerName" xml:space="preserve">
+    <value>Owner Name</value>
+  </data>
+  <data name="label_OwnerTitle" xml:space="preserve">
+    <value>Owner Title</value>
+  </data>
+  <data name="label_ParentListTitle" xml:space="preserve">
+    <value>ParentListTitle</value>
+  </data>
+  <data name="label_ParentWebTitle" xml:space="preserve">
+    <value>Parent Web Title</value>
+  </data>
+  <data name="label_ParentWebUrl" xml:space="preserve">
+    <value>Parent Web URL</value>
+  </data>
+  <data name="label_Permission" xml:space="preserve">
+    <value>Permission</value>
+  </data>
+  <data name="label_PrincipalType" xml:space="preserve">
+    <value>Principal Type</value>
+  </data>
+  <data name="label_PublishDocument" xml:space="preserve">
+    <value>Publish Document</value>
+  </data>
+  <data name="label_PublishDocumentById" xml:space="preserve">
+    <value>Publish Document By ID</value>
+  </data>
+  <data name="label_ReadOnly" xml:space="preserve">
+    <value>ReadOnly</value>
+  </data>
+  <data name="label_ReadOnlyField" xml:space="preserve">
+    <value>ReadOnlyField</value>
+  </data>
+  <data name="label_ReceiverID" xml:space="preserve">
+    <value>EventReceiverID</value>
+  </data>
+  <data name="label_Recursive" xml:space="preserve">
+    <value>Recursive</value>
+  </data>
+  <data name="label_RecycleBin" xml:space="preserve">
+    <value>Recycle Bin</value>
+  </data>
+  <data name="label_RecycleBinGuid" xml:space="preserve">
+    <value>Recycle Bin Guid</value>
+  </data>
+  <data name="label_RecycleBinItemDeletedBy" xml:space="preserve">
+    <value>Deleted By</value>
+  </data>
+  <data name="label_RecycleBinItemDeletedDate" xml:space="preserve">
+    <value>Deleted Date</value>
+  </data>
+  <data name="label_RecycleBinItemID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="label_RecycleBinItemLeafName" xml:space="preserve">
+    <value>Leaf Name</value>
+  </data>
+  <data name="label_RecycleBinItemTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="label_RecycleCalendarItem" xml:space="preserve">
+    <value>Recycle Calendar Event</value>
+  </data>
+  <data name="label_RecycleDocument" xml:space="preserve">
+    <value>Recycle Document</value>
+  </data>
+  <data name="label_RecycleDocumentById" xml:space="preserve">
+    <value>Recycle Document By ID</value>
+  </data>
+  <data name="label_RecycleDocumentSet" xml:space="preserve">
+    <value>Recycle Document Set</value>
+  </data>
+  <data name="label_RecycleDocumentSetById" xml:space="preserve">
+    <value>Recycle Document Set By ID</value>
+  </data>
+  <data name="label_RecycleFolder" xml:space="preserve">
+    <value>Recycle Folder</value>
+  </data>
+  <data name="label_RecycleLibrary" xml:space="preserve">
+    <value>Recycle Library</value>
+  </data>
+  <data name="label_RecycleLibraryById" xml:space="preserve">
+    <value>Recycle Library By ID</value>
+  </data>
+  <data name="label_RecycleList" xml:space="preserve">
+    <value>Recycle List</value>
+  </data>
+  <data name="label_RecycleListById" xml:space="preserve">
+    <value>Recycle List By ID</value>
+  </data>
+  <data name="label_RecycleListItem" xml:space="preserve">
+    <value>Recycle List Item</value>
+  </data>
+  <data name="label_RecycleSiteById" xml:space="preserve">
+    <value>Recycle Site By ID</value>
+  </data>
+  <data name="label_RecycleSiteByTitle" xml:space="preserve">
+    <value>Recycle Site By Title</value>
+  </data>
+  <data name="label_RegisterEvent" xml:space="preserve">
+    <value>Register Remote Event</value>
+  </data>
+  <data name="label_RelativeUrl" xml:space="preserve">
+    <value>Relative URL</value>
+  </data>
+  <data name="label_RemoteEventReceiverURL" xml:space="preserve">
+    <value>Remote Event Receiver URL</value>
+  </data>
+  <data name="label_RemoteReceiverTypes" xml:space="preserve">
+    <value>Remote Receiver Types</value>
+  </data>
+  <data name="label_RemoveAllAttachments" xml:space="preserve">
+    <value>Remove All Attachments</value>
+  </data>
+  <data name="label_RemoveAppFromSite" xml:space="preserve">
+    <value>Remove K2 App from Site</value>
+  </data>
+  <data name="label_RemoveAttachment" xml:space="preserve">
+    <value>Remove Attachment</value>
+  </data>
+  <data name="label_RemoveEvent" xml:space="preserve">
+    <value>Remove Remote Event</value>
+  </data>
+  <data name="label_RemoveGroupFromRole" xml:space="preserve">
+    <value>Remove Group From Role</value>
+  </data>
+  <data name="label_RemoveUserFromGroup" xml:space="preserve">
+    <value>Remove User From Group</value>
+  </data>
+  <data name="label_RemoveUserFromRole" xml:space="preserve">
+    <value>Remove User From Role</value>
+  </data>
+  <data name="label_RenameDocument" xml:space="preserve">
+    <value>Rename Document</value>
+  </data>
+  <data name="label_RenameDocumentById" xml:space="preserve">
+    <value>Rename Document By ID</value>
+  </data>
+  <data name="label_RenameDocumentSet" xml:space="preserve">
+    <value>Rename Document Set</value>
+  </data>
+  <data name="label_RenameDocumentSetById" xml:space="preserve">
+    <value>Rename Document Set By ID</value>
+  </data>
+  <data name="label_RenameFolder" xml:space="preserve">
+    <value>Rename Folder</value>
+  </data>
+  <data name="label_RequestToJoinLeaveEmailSetting" xml:space="preserve">
+    <value>Request To Join Leave Email Setting</value>
+  </data>
+  <data name="label_Required" xml:space="preserve">
+    <value>Required</value>
+  </data>
+  <data name="label_ResetListFormsUrl" xml:space="preserve">
+    <value>Reset List Forms URL</value>
+  </data>
+  <data name="label_RestoreListByID" xml:space="preserve">
+    <value>Restore List By ID</value>
+  </data>
+  <data name="label_RestoreRecycleBinCalendarItem" xml:space="preserve">
+    <value>Restore Calendar Event</value>
+  </data>
+  <data name="label_RestoreRecycleBinDocument" xml:space="preserve">
+    <value>Restore Document</value>
+  </data>
+  <data name="label_RestoreRecycleBinDocumentSet" xml:space="preserve">
+    <value>Restore Document Set</value>
+  </data>
+  <data name="label_RestoreRecycleBinFolder" xml:space="preserve">
+    <value>Restore Folder</value>
+  </data>
+  <data name="label_RestoreRecycleBinItem" xml:space="preserve">
+    <value>Restore Item</value>
+  </data>
+  <data name="label_RestoreRecycleBinLibrary" xml:space="preserve">
+    <value>Restore Library</value>
+  </data>
+  <data name="label_RestoreRecycleBinList" xml:space="preserve">
+    <value>Restore List</value>
+  </data>
+  <data name="label_RestoreRecycleBinListItem" xml:space="preserve">
+    <value>Restore List Item</value>
+  </data>
+  <data name="label_RestoreRecycleBinSite" xml:space="preserve">
+    <value>Restore Site</value>
+  </data>
+  <data name="label_RestoreVersion" xml:space="preserve">
+    <value>Restore Version</value>
+  </data>
+  <data name="label_RetainCheckOut" xml:space="preserve">
+    <value>Retain Check Out</value>
+  </data>
+  <data name="label_Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="label_RootFolderName" xml:space="preserve">
+    <value>Root Folder Name</value>
+  </data>
+  <data name="label_RootWebOnly" xml:space="preserve">
+    <value>Root Web Only</value>
+  </data>
+  <data name="label_RowLimit" xml:space="preserve">
+    <value>Row Limit</value>
+  </data>
+  <data name="label_SaveDocumentToFileLocation" xml:space="preserve">
+    <value>Save Document to File Location</value>
+  </data>
+  <data name="label_SchemaXml" xml:space="preserve">
+    <value>Schema Xml</value>
+  </data>
+  <data name="label_Sealed" xml:space="preserve">
+    <value>Sealed</value>
+  </data>
+  <data name="label_SequenceNumber" xml:space="preserve">
+    <value>SequenceNumber</value>
+  </data>
+  <data name="label_ServerRelativeUrl" xml:space="preserve">
+    <value>Server Relative URL</value>
+  </data>
+  <data name="label_ServerVersion" xml:space="preserve">
+    <value>Server Version</value>
+  </data>
+  <data name="label_ServiceObjectXml" xml:space="preserve">
+    <value>Service Object Xml</value>
+  </data>
+  <data name="label_ServiceObject_Web" xml:space="preserve">
+    <value>Site</value>
+  </data>
+  <data name="label_SetListFormsUrl" xml:space="preserve">
+    <value>Set List Forms URL</value>
+  </data>
+  <data name="label_SetListFormsUrlFromXml" xml:space="preserve">
+    <value>Set List Forms URL From Xml</value>
+  </data>
+  <data name="label_SiteCollection" xml:space="preserve">
+    <value>Site Collection</value>
+  </data>
+  <data name="label_SiteID" xml:space="preserve">
+    <value>SiteID</value>
+  </data>
+  <data name="label_SiteRecycleBinGuid" xml:space="preserve">
+    <value>Site Recycle Bin Guid</value>
+  </data>
+  <data name="label_SiteRelativeUrl" xml:space="preserve">
+    <value>Subsite Relative URL</value>
+  </data>
+  <data name="label_SiteTemplate" xml:space="preserve">
+    <value>Site Template</value>
+  </data>
+  <data name="label_SiteUrl" xml:space="preserve">
+    <value>Site Url</value>
+  </data>
+  <data name="label_SolutionDesigners" xml:space="preserve">
+    <value>Solution Designers</value>
+  </data>
+  <data name="label_SolutionDesignersName" xml:space="preserve">
+    <value>Solution Designers Name</value>
+  </data>
+  <data name="label_SolutionDesignersValue" xml:space="preserve">
+    <value>Solution Designers Value</value>
+  </data>
+  <data name="label_SolutionParticipants" xml:space="preserve">
+    <value>Solution Participants</value>
+  </data>
+  <data name="label_SolutionParticipantsName" xml:space="preserve">
+    <value>Solution Participants Name</value>
+  </data>
+  <data name="label_SolutionParticipantsValue" xml:space="preserve">
+    <value>Solution Participants Value</value>
+  </data>
+  <data name="label_SpecifiedUserAccount" xml:space="preserve">
+    <value>Specified User Account</value>
+  </data>
+  <data name="label_SpecifiedUserAccountName" xml:space="preserve">
+    <value>Specified User Account Setting Name</value>
+  </data>
+  <data name="label_SpecifiedUserAccountValue" xml:space="preserve">
+    <value>Specified User Account Setting Value</value>
+  </data>
+  <data name="label_StaticName" xml:space="preserve">
+    <value>Static Name</value>
+  </data>
+  <data name="label_SubmissionPolicy" xml:space="preserve">
+    <value>Submission Policy</value>
+  </data>
+  <data name="label_SubsitesFolder" xml:space="preserve">
+    <value>Sites</value>
+  </data>
+  <data name="label_SubWebOnly" xml:space="preserve">
+    <value>Sub Web Only</value>
+  </data>
+  <data name="label_Synchronization" xml:space="preserve">
+    <value>Synchronization</value>
+  </data>
+  <data name="label_Taxonomy" xml:space="preserve">
+    <value>Taxonomy</value>
+  </data>
+  <data name="label_TemplateFeatureId" xml:space="preserve">
+    <value>Template Feature ID</value>
+  </data>
+  <data name="label_Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="label_Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="label_TypeAsString" xml:space="preserve">
+    <value>Type As String</value>
+  </data>
+  <data name="label_Unique" xml:space="preserve">
+    <value>Unique</value>
+  </data>
+  <data name="label_UnPublishDocument" xml:space="preserve">
+    <value>Retract Document</value>
+  </data>
+  <data name="label_UnPublishDocumentById" xml:space="preserve">
+    <value>Retract Document By ID</value>
+  </data>
+  <data name="label_UnpublishVersion" xml:space="preserve">
+    <value>Retract Version</value>
+  </data>
+  <data name="label_UpdateCalendarItem" xml:space="preserve">
+    <value>Update Calendar Event</value>
+  </data>
+  <data name="label_UpdateDocumentMetaById" xml:space="preserve">
+    <value>Update Document Metadata By ID</value>
+  </data>
+  <data name="label_UpdateDocumentMetadata" xml:space="preserve">
+    <value>Update Document Metadata</value>
+  </data>
+  <data name="label_UpdateDocumentMetadataById" xml:space="preserve">
+    <value>Update Document Metadata By ID</value>
+  </data>
+  <data name="label_UpdateDocumentSet" xml:space="preserve">
+    <value>Update Document Set</value>
+  </data>
+  <data name="label_UpdateDocumentSetById" xml:space="preserve">
+    <value>Update Document Set By ID</value>
+  </data>
+  <data name="label_UpdateGroup" xml:space="preserve">
+    <value>Update Group</value>
+  </data>
+  <data name="label_UpdateGroupById" xml:space="preserve">
+    <value>Update Group By ID</value>
+  </data>
+  <data name="label_UpdateLibrary" xml:space="preserve">
+    <value>Update Library</value>
+  </data>
+  <data name="label_UpdateLibraryById" xml:space="preserve">
+    <value>Update Library By ID</value>
+  </data>
+  <data name="label_UpdateList" xml:space="preserve">
+    <value>Update List</value>
+  </data>
+  <data name="label_UpdateListById" xml:space="preserve">
+    <value>Update List By ID</value>
+  </data>
+  <data name="label_UpdateListItem" xml:space="preserve">
+    <value>Update List Item</value>
+  </data>
+  <data name="label_UpdateRole" xml:space="preserve">
+    <value>Update Role</value>
+  </data>
+  <data name="label_UpdateSite" xml:space="preserve">
+    <value>Update Site</value>
+  </data>
+  <data name="label_UploadDocument" xml:space="preserve">
+    <value>Upload Document</value>
+  </data>
+  <data name="label_UploadFormTemplate" xml:space="preserve">
+    <value>Upload Form Template</value>
+  </data>
+  <data name="label_Url" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="label_UseCheckedInVersion" xml:space="preserve">
+    <value>Use Checked In Version</value>
+  </data>
+  <data name="label_UseCheckedOutVersion" xml:space="preserve">
+    <value>Use Checked Out Version</value>
+  </data>
+  <data name="label_UseCurrentUser" xml:space="preserve">
+    <value>Use Current User</value>
+  </data>
+  <data name="label_UseCurrentUserName" xml:space="preserve">
+    <value>Use Current User Setting Name</value>
+  </data>
+  <data name="label_UseCurrentUserValue" xml:space="preserve">
+    <value>Use Current User Setting Value</value>
+  </data>
+  <data name="label_UseExistingLibrary" xml:space="preserve">
+    <value>Use Existing Library</value>
+  </data>
+  <data name="label_UseExistingList" xml:space="preserve">
+    <value>Use Existing List</value>
+  </data>
+  <data name="label_UseParentTopLinkBar" xml:space="preserve">
+    <value>Use top link bar of parent</value>
+  </data>
+  <data name="label_User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="label_UserEmail" xml:space="preserve">
+    <value>User Email</value>
+  </data>
+  <data name="label_UserId" xml:space="preserve">
+    <value>User ID</value>
+  </data>
+  <data name="label_UserIds" xml:space="preserve">
+    <value>User ID's</value>
+  </data>
+  <data name="label_UserLogInName" xml:space="preserve">
+    <value>User Login Name</value>
+  </data>
+  <data name="label_UserTitle" xml:space="preserve">
+    <value>User Title</value>
+  </data>
+  <data name="label_ValidationFormula" xml:space="preserve">
+    <value>Validation Formula</value>
+  </data>
+  <data name="label_ValidationMessage" xml:space="preserve">
+    <value>Validation Message</value>
+  </data>
+  <data name="label_VersionComments" xml:space="preserve">
+    <value>Version Comments</value>
+  </data>
+  <data name="label_Views" xml:space="preserve">
+    <value>Views</value>
+  </data>
+  <data name="label_WebTemplate" xml:space="preserve">
+    <value>Web Template</value>
+  </data>
+  <data name="label_WorkflowAssociationIds" xml:space="preserve">
+    <value>Workflow Association ID's</value>
+  </data>
+  <data name="label_Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="labe_CreateFolder" xml:space="preserve">
+    <value>Create Folder</value>
+  </data>
+  <data name="labe_GetDocumentMetadata" xml:space="preserve">
+    <value>Get Document Metadata</value>
+  </data>
+  <data name="labe_GetDocumentMetadataById" xml:space="preserve">
+    <value>Get Document Metadata By ID</value>
+  </data>
+  <data name="labe_MethodNamingDocument" xml:space="preserve">
+    <value>Document Metadata By ID</value>
+  </data>
+  <data name="ListTemplate_Error" xml:space="preserve">
+    <value>List Template Error</value>
+  </data>
+  <data name="LocaleId" xml:space="preserve">
+    <value>Locale ID</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Office365" xml:space="preserve">
+    <value>Office 365</value>
+  </data>
+  <data name="ParentTermId" xml:space="preserve">
+    <value>Parent Term ID</value>
+  </data>
+  <data name="ParentTermLabel" xml:space="preserve">
+    <value>Parent Term Label</value>
+  </data>
+  <data name="ParseLookupFieldValues" xml:space="preserve">
+    <value>Parse Lookup Field Values</value>
+  </data>
+  <data name="Path" xml:space="preserve">
+    <value>Path</value>
+  </data>
+  <data name="serviceDisplayName" xml:space="preserve">
+    <value>SharePoint Definition Service</value>
+  </data>
+  <data name="serviceName" xml:space="preserve">
+    <value>SharePoint Definition Service</value>
+  </data>
+  <data name="ServiceTimeOut" xml:space="preserve">
+    <value>Service Time Out</value>
+  </data>
+  <data name="Service_Description" xml:space="preserve">
+    <value>Provides K2 with the capability to manage SharePoint site content</value>
+  </data>
+  <data name="SourceFolder" xml:space="preserve">
+    <value>Source Folder</value>
+  </data>
+  <data name="SourceLibrary" xml:space="preserve">
+    <value>Source Library</value>
+  </data>
+  <data name="SourceList" xml:space="preserve">
+    <value>Source List</value>
+  </data>
+  <data name="SourceSiteUrl" xml:space="preserve">
+    <value>Source Site Url</value>
+  </data>
+  <data name="Task_NotAvailable" xml:space="preserve">
+    <value>Not available.</value>
+  </data>
+  <data name="TaxonomyServiceError" xml:space="preserve">
+    <value>The SharePoint taxonomy service returned an error:  </value>
+  </data>
+  <data name="TaxonomyServiceObject_Description" xml:space="preserve">
+    <value>Is a hierarchical collection of centrally managed terms that you can define and then use as attributes for items in Microsoft SharePoint Server 2010.</value>
+  </data>
+  <data name="TaxonomyServiceObject_DisplayName" xml:space="preserve">
+    <value>Managed Metadata</value>
+  </data>
+  <data name="TermId" xml:space="preserve">
+    <value>Term ID</value>
+  </data>
+  <data name="TermSetId" xml:space="preserve">
+    <value>Term Set ID</value>
+  </data>
+  <data name="TermStoreId" xml:space="preserve">
+    <value>Term Store ID (GUID)</value>
+  </data>
+  <data name="TermStoreName" xml:space="preserve">
+    <value>Term Store Name</value>
+  </data>
+  <data name="ThrottleDocuments" xml:space="preserve">
+    <value>Throttle Documents</value>
+  </data>
+  <data name="ThrottleListItems" xml:space="preserve">
+    <value>Throttle List Items</value>
+  </data>
+  <data name="UseInternalFieldNames" xml:space="preserve">
+    <value>Use Internal Field Names</value>
+  </data>
+</root>
