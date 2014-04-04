@@ -1336,7 +1336,10 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                         {
                             if (dr.Table.Columns.Contains(s.ToLower()))
                             {
-                                dr[s.ToLower()] = result[s];
+                                if (result[s] != null)
+                                {
+                                    dr[s.ToLower()] = result[s];
+                                }
                             }
                             else
                             {
