@@ -957,158 +957,10 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
         {
             List<Property> ContainerProperties = new List<Property>();
 
-            Property search = new Property
-            {
-                Name = "search",
-                MetaData = new MetaData("Search", "Search"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(search);
-
-            Property startrow = new Property
-            {
-                Name = "startrow",
-                MetaData = new MetaData("Start Row", "Start Row"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Number,
-                Type = "System.Int32"
-            };
-            ContainerProperties.Add(startrow);
-
-            Property rowlimit = new Property
-            {
-                Name = "rowlimit",
-                MetaData = new MetaData("Row Limit", "Row Limit"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Number,
-                Type = "System.Int32"
-            };
-            ContainerProperties.Add(rowlimit);
-
-            Property sort = new Property
-            {
-                Name = "sort",
-                MetaData = new MetaData("Sort", "Sort"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(sort);
-
-            Property enablephonetic = new Property
-            {
-                Name = "enablephonetic",
-                MetaData = new MetaData("Enable Phonetic", "Enable Phonetic"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.YesNo,
-                Type = "System.Boolean"
-            };
-            ContainerProperties.Add(enablephonetic);
-
-            Property enablenicknames = new Property
-            {
-                Name = "enablenicknames",
-                MetaData = new MetaData("Enable Nicknames", "Enable Nicknames"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.YesNo,
-                Type = "System.Boolean"
-            };
-            ContainerProperties.Add(enablenicknames);
-
-            Property sourceid = new Property
-            {
-                Name = "sourceid",
-                MetaData = new MetaData("Source Id", "Source Id"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Guid,
-                Type = "System.Guid"
-            };
-            ContainerProperties.Add(sourceid);
-
-            Property sourcename = new Property
-            {
-                Name = "sourcename",
-                MetaData = new MetaData("Source Name", "Source Name"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(sourcename);
-
-
-            Property executiontime = new Property
-            {
-                Name = "executiontime",
-                MetaData = new MetaData("Execution Time", "Execution Time"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Number,
-                Type = "System.Int32"
-            };
-            ContainerProperties.Add(executiontime);
-
-            Property resultrows = new Property
-            {
-                Name = "resultrows",
-                MetaData = new MetaData("Result Rows", "Result Rows"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Number,
-                Type = "System.Int32"
-            };
-            ContainerProperties.Add(resultrows);
-
-            Property totalrows = new Property
-            {
-                Name = "totalrows",
-                MetaData = new MetaData("Total Rows", "Total Rows"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Number,
-                Type = "System.Int32"
-            };
-            ContainerProperties.Add(totalrows);
-
-            Property ResultsTitle = new Property
-            {
-                Name = "resulttitle",
-                MetaData = new MetaData("Result Title", "Results Title"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(ResultsTitle);
-
-            Property ResultsTitleUrl = new Property
-            {
-                Name = "resulttitleurl",
-                MetaData = new MetaData("Result Title Url", "Result Title Url"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(ResultsTitleUrl);
-
-            Property SpellingSuggestions = new Property
-            {
-                Name = "spellingsuggestions",
-                MetaData = new MetaData("Spelling Suggestions", "Spelling Suggestions"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(SpellingSuggestions);
-
-            Property TableType = new Property
-            {
-                Name = "tabletype",
-                MetaData = new MetaData("Table Type", "Table Type"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(TableType);
-
-
-            Property SerializedResults = new Property
-            {
-                Name = "serializedresults",
-                MetaData = new MetaData("Serialized Results", "Serialized Results"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Memo,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(SerializedResults);
-
-            // full props
-            ContainerProperties.AddRange(GetSPSearchFullReturnsProperties());
-
-            // user props
-            ContainerProperties.AddRange(GetUserProperties());
-
+            ContainerProperties.AddRange(SPSearchProperties.GetSearchInputProperties());
+            ContainerProperties.AddRange(SPSearchProperties.GetSearchResultSummaryProperties());
+            ContainerProperties.AddRange(SPSearchProperties.GetSearchResultReturnProperties());
+            ContainerProperties.AddRange(SPSearchProperties.GetUserSearchResultProperties());
             ContainerProperties.AddRange(StandardReturns.GetStandardReturnProperties());
 
             return ContainerProperties;
@@ -1123,11 +975,20 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
             Search.Validation.RequiredProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "fileextensions").First());
+
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "sort").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "sourceid").First());
 
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "startrow").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "rowlimit").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "sourceid").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "sort").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "rowlimit").First()); 
+            
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "enablestemming").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "trimduplicates").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "enablequeryrules").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "processbestbets").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "processpersonal").First());
+            
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "enablenicknames").First());
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "enablephonetic").First());
 
@@ -1155,19 +1016,37 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
             Search.Validation.RequiredProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "startrow").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "rowlimit").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "sourceid").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "fileextensions").First());
+
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "sort").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "sourceid").First());
+
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "startrow").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "rowlimit").First()); 
+            
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "enablestemming").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "trimduplicates").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "enablequeryrules").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "processbestbets").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "processpersonal").First());
+
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "enablenicknames").First());
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "enablephonetic").First());
 
 
             Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
+            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "fileextensions").First());
+            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "sort").First());
+            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "sourceid").First());
             Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "startrow").First());
             Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "rowlimit").First());
-            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "sourceid").First());
-            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "sort").First());
+
+            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "enablestemming").First());
+            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "trimduplicates").First());
+            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "enablequeryrules").First());
+            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "processbestbets").First());
+            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "processpersonal").First());
+
             Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "enablenicknames").First());
             Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "enablephonetic").First());
 
@@ -1409,15 +1288,48 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 
                     if (!string.IsNullOrWhiteSpace(SerializedResults.Inputs.SortString))
                     {
-                        returns.Where(p => p.Name.Equals("sort", StringComparison.OrdinalIgnoreCase)).First().Value = SerializedResults.Inputs.SortString;
+                        //returns.Where(p => p.Name.Equals("sort", StringComparison.OrdinalIgnoreCase)).First().Value = SerializedResults.Inputs.SortString;
+
+                        // for testing
+                        returns.Where(p => p.Name.Equals("sort", StringComparison.OrdinalIgnoreCase)).First().Value = GetColumns(SerializedResults);
                     }
 
-                    if (SerializedResults.Inputs.EnableNicknames.HasValue && SerializedResults.Inputs.EnableNicknames.Value)
+                    if (!string.IsNullOrWhiteSpace(SerializedResults.Inputs.FileExtensionsString))
+                    {
+                        returns.Where(p => p.Name.Equals("fileextensions", StringComparison.OrdinalIgnoreCase)).First().Value = SerializedResults.Inputs.FileExtensionsString;
+                    }
+
+                    if (SerializedResults.Inputs.EnableStemming.HasValue)
+                    {
+                        returns.Where(p => p.Name.Equals("enablestemming", StringComparison.OrdinalIgnoreCase)).First().Value = SerializedResults.Inputs.EnableStemming.Value;
+                    }
+
+                    if (SerializedResults.Inputs.TrimDuplicates.HasValue)
+                    {
+                        returns.Where(p => p.Name.Equals("trimduplicates", StringComparison.OrdinalIgnoreCase)).First().Value = SerializedResults.Inputs.TrimDuplicates.Value;
+                    }
+
+                    if (SerializedResults.Inputs.EnableQueryRules.HasValue)
+                    {
+                        returns.Where(p => p.Name.Equals("enablequeryrules", StringComparison.OrdinalIgnoreCase)).First().Value = SerializedResults.Inputs.EnableQueryRules.Value;
+                    }
+
+                    if (SerializedResults.Inputs.ProcessBestBets.HasValue)
+                    {
+                        returns.Where(p => p.Name.Equals("processbestbets", StringComparison.OrdinalIgnoreCase)).First().Value = SerializedResults.Inputs.ProcessBestBets.Value;
+                    }
+
+                    if (SerializedResults.Inputs.ProcessPersonal.HasValue)
+                    {
+                        returns.Where(p => p.Name.Equals("processpersonal", StringComparison.OrdinalIgnoreCase)).First().Value = SerializedResults.Inputs.ProcessPersonal.Value;
+                    }
+
+                    if (SerializedResults.Inputs.EnableNicknames.HasValue)
                     {
                         returns.Where(p => p.Name.Equals("enablenicknames", StringComparison.OrdinalIgnoreCase)).First().Value = SerializedResults.Inputs.EnableNicknames.Value;
                     }
 
-                    if (SerializedResults.Inputs.EnablePhonetic.HasValue && SerializedResults.Inputs.EnablePhonetic.Value)
+                    if (SerializedResults.Inputs.EnablePhonetic.HasValue)
                     {
                         returns.Where(p => p.Name.Equals("enablephonetic", StringComparison.OrdinalIgnoreCase)).First().Value = SerializedResults.Inputs.EnablePhonetic.Value;
                     }
@@ -1629,52 +1541,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             RESTSearchResultsSerialized SerializedResults = new RESTSearchResultsSerialized();
             SerializedResults.Inputs = SearchInputs;
 
-
-                
-            //KeywordQuery keywordQuery = new KeywordQuery(cc);
-            //keywordQuery.QueryText = SearchInputs.Search;
-
-            //SearchExecutor searchExecutor = new SearchExecutor(cc);
-            if (SearchInputs.StartRow.HasValue && SearchInputs.StartRow.Value > -1)
-            {
-                //keywordQuery.StartRow = SearchInputs.StartRow.Value;
-            }
-
-            //keywordQuery.RowsPerPage = int.Parse(txtRowsPerPage.Text);
-            if (SearchInputs.RowLimit.HasValue && SearchInputs.RowLimit.Value > -1)
-            {
-                //keywordQuery.RowLimit = SearchInputs.RowLimit.Value;
-            }
-
-            //keywordQuery.Culture = Configuration.LocaleId;
-
-            if (SearchInputs.SourceId != null && SearchInputs.SourceId != Guid.Empty)
-            {
-                //keywordQuery.SourceId = SearchInputs.SourceId;
-            }
-
-            if (SearchInputs.Sort.Count > 0)
-            {
-                foreach (KeyValuePair<string, SortDirection> s in SearchInputs.Sort)
-                {
-                    //keywordQuery.SortList.Add(s.Key, s.Value);
-                }
-            }
-
-            if (SearchInputs.EnableNicknames.HasValue && SearchInputs.EnableNicknames.Value)
-            {
-                //keywordQuery.EnableNicknames = SearchInputs.EnableNicknames.Value;
-            }
-
-            if (SearchInputs.EnablePhonetic.HasValue && SearchInputs.EnablePhonetic.Value)
-            {
-                //keywordQuery.EnablePhonetic = SearchInputs.EnablePhonetic.Value;
-            }
-
-
-            // updated for inputs
             RESTSearchResults res = ExecuteRESTRequest(BuildSearchText(SearchInputs));
-
 
             if (res != null)
             {
@@ -1688,7 +1555,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 
                 SerializedResults.ResultTitle = res.PrimaryQueryResult.RelevantResults.ResultTitle;
                 SerializedResults.ResultTitleUrl = res.PrimaryQueryResult.RelevantResults.ResultTitleUrl;
-                SerializedResults.SpellingSuggestions = res.SpellingSuggestion;
+                SerializedResults.SpellingSuggestions = res.SpellingSuggestion;                
                     
                 SerializedResults.SearchResults = res.PrimaryQueryResult.RelevantResults.Table;
 
@@ -1777,18 +1644,45 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                 }
             }
 
+
+            string fileext = string.Empty;
+            var fileextprop = inputs.Where(p => p.Name.Equals("fileextensions", StringComparison.OrdinalIgnoreCase)).First();
+            if (fileextprop != null && fileextprop.Value != null && !string.IsNullOrWhiteSpace(fileextprop.Value.ToString()))
+            {
+                InputValues.FileExtensions = new List<string>();
+                fileext = fileextprop.Value.ToString();
+                string[] sortsArray = fileext.Split(',');
+
+                foreach(string fx in sortsArray)
+                {
+                    InputValues.FileExtensions.Add(fx.Trim());
+                }
+
+                string filter = string.Empty;
+                for (int i = 0; i < InputValues.FileExtensions.Count; i++)
+                {
+                    filter += "\"" + InputValues.FileExtensions[i] + "\"";
+                    if (i <= InputValues.FileExtensions.Count-2)
+                    {
+                        filter += ",";
+                    }
+                }
+                InputValues.FileExtensionsString = filter;
+            }
+
+
             string sorts = string.Empty;
-            Dictionary<string, SortDirection> sort = new Dictionary<string, SortDirection>();
+            Dictionary<string, string> sort = new Dictionary<string, string>();
             var sortProp = inputs.Where(p => p.Name.Equals("sort", StringComparison.OrdinalIgnoreCase)).First();
             if (sortProp != null && sortProp.Value != null && !string.IsNullOrWhiteSpace(sortProp.Value.ToString()))
             {
                 sorts = sortProp.Value.ToString();
-                string[] sortsArray = sorts.Split(';');
+                string[] sortsArray = sorts.Split(',');
                 foreach (string s in sortsArray)
                 {
-                    string[] ss = s.Split(',');
+                    string[] ss = s.Split(':');
                     string prop = string.Empty;
-                    Microsoft.SharePoint.Client.Search.Query.SortDirection direction;
+                    string direction = string.Empty;
                     if (ss.Length > 1)
                     {
                         // JJK: can we check if the supplied property exists?
@@ -1799,14 +1693,14 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                             case "descending":
                             case "desc":
                             case "des":
-                                direction = SortDirection.Descending;
+                                direction = "descending";
                                 break;
                             case "ascending":
                             case "asc":
-                                direction = SortDirection.Ascending;
+                                direction = "ascending";
                                 break;
                             default:
-                                direction = SortDirection.Ascending;
+                                direction = "ascending";
                                 break;
                         }
 
@@ -1817,16 +1711,96 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                     }
                 }
                 //returns.Where(p => p.Name.Equals("sort", StringComparison.OrdinalIgnoreCase)).First().Value = sorts;
-            }
-            InputValues.SortString = sorts;
+            }            
+
             if (sort.Count > 0)
             {
+                string sortstring = string.Empty;
                 InputValues.Sort = sort;
+
+                int o = 0;
+                foreach(KeyValuePair<string, string> s in sort)
+                {
+                    InputValues.SortString += s.Key + ":" + s.Value;
+                    if(o <= sort.Count-2)
+                    {
+                        InputValues.SortString += ",";
+                    }
+                    o++;
+                }
+            }
+
+            bool enablestemming = false;
+            var enablestemmingprop = inputs.Where(p => p.Name.Equals("enablestemming", StringComparison.OrdinalIgnoreCase)).First();
+            if (enablestemmingprop != null && enablestemmingprop.Value != null && !string.IsNullOrWhiteSpace(enablestemmingprop.Value.ToString()))
+            {
+                if (bool.TryParse(enablestemmingprop.Value.ToString(), out enablestemming))
+                {
+                    InputValues.EnableStemming = enablestemming;
+                }
+            }
+
+            bool trimduplicates = false;
+            var trimduplicatesprop = inputs.Where(p => p.Name.Equals("trimduplicates", StringComparison.OrdinalIgnoreCase)).First();
+            if (trimduplicatesprop != null && trimduplicatesprop.Value != null && !string.IsNullOrWhiteSpace(trimduplicatesprop.Value.ToString()))
+            {
+                if (bool.TryParse(trimduplicatesprop.Value.ToString(), out trimduplicates))
+                {
+                    InputValues.TrimDuplicates = trimduplicates;
+                }
+            }
+
+            bool enablequeryrules = false;
+            var enablequeryrulesprop = inputs.Where(p => p.Name.Equals("enablequeryrules", StringComparison.OrdinalIgnoreCase)).First();
+            if (enablequeryrulesprop != null && enablequeryrulesprop.Value != null && !string.IsNullOrWhiteSpace(enablequeryrulesprop.Value.ToString()))
+            {
+                if (bool.TryParse(enablequeryrulesprop.Value.ToString(), out enablequeryrules))
+                {
+                    InputValues.EnableQueryRules = enablequeryrules;
+                }
+            }
+
+            bool processbestbets = false;
+            var processbestbetsprop = inputs.Where(p => p.Name.Equals("processbestbets", StringComparison.OrdinalIgnoreCase)).First();
+            if (processbestbetsprop != null && processbestbetsprop.Value != null && !string.IsNullOrWhiteSpace(processbestbetsprop.Value.ToString()))
+            {
+                if (bool.TryParse(processbestbetsprop.Value.ToString(), out processbestbets))
+                {
+                    InputValues.ProcessBestBets = processbestbets;
+                }
+            }
+
+            bool processpersonal = false;
+            var processpersonalprop = inputs.Where(p => p.Name.Equals("processpersonal", StringComparison.OrdinalIgnoreCase)).First();
+            if (processpersonalprop != null && processpersonalprop.Value != null && !string.IsNullOrWhiteSpace(processpersonalprop.Value.ToString()))
+            {
+                if (bool.TryParse(processpersonalprop.Value.ToString(), out processpersonal))
+                {
+                    InputValues.ProcessPersonal = processpersonal;
+                }
             }
 
             return InputValues;
         }
 
+
+        //for debugging
+        private string GetColumns(RESTSearchResultsSerialized results)
+        {
+            string cols = string.Empty;
+            int i = 0;
+            foreach(ResultCell cell in results.SearchResults.Rows[0].Cells.OrderBy(p => p.Key))
+            {
+                cols += cell.Key + " (" + cell.ValueType + ")";
+                if (i <= results.SearchResults.Rows.Length-2)
+                {
+                    cols += ",";
+                }
+                i++;
+            }
+
+            return cols;
+        }
 
         private string BuildSearchText(SearchInputs Inputs)
         {
@@ -1836,18 +1810,17 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 
             SearchQuery = "?querytext='" + Inputs.Search + "'";
 
+            SearchQuery += "&culture=" + Configuration.LocaleId;
+
             if (Inputs.StartRow.HasValue && Inputs.StartRow.Value > -1)
             {
                 SearchQuery += "&startrow=" + Inputs.StartRow;
             }
 
-            //keywordQuery.RowsPerPage = int.Parse(txtRowsPerPage.Text);
             if (Inputs.RowLimit.HasValue && Inputs.RowLimit.Value > -1)
             {
                 SearchQuery += "&rowlimit=" + Inputs.RowLimit;
-            }
-
-            //keywordQuery.Culture = Configuration.LocaleId;
+            }           
 
             if (Inputs.SourceId != null && Inputs.SourceId != Guid.Empty)
             {
@@ -1856,20 +1829,56 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 
             if (Inputs.Sort.Count > 0)
             {
-                foreach (KeyValuePair<string, SortDirection> s in Inputs.Sort)
+                SearchQuery += "&sortlist='" + Inputs.SortString + "'";
+            }
+
+            if (Inputs.FileExtensions != null && Inputs.FileExtensions.Count > 0)
+            {
+                //&refiners='filetype'
+
+                if (Inputs.FileExtensions.Count < 2 )
                 {
-                    //keywordQuery.SortList.Add(s.Key, s.Value);
+                    SearchQuery += "&refiners='filetype,fileextension'&refinementfilters='filetype:equals(" + Inputs.FileExtensionsString + ")'";
                 }
+                else
+                {
+                    SearchQuery += "&refiners='filetype,fileextension'&refinementfilters='filetype:or(" + Inputs.FileExtensionsString + ")'";
+                }                
             }
 
-            if (Inputs.EnableNicknames.HasValue && Inputs.EnableNicknames.Value)
+            if (Inputs.EnableStemming.HasValue)
             {
-                SearchQuery += "&enablenicknames=" + Inputs.EnableNicknames;
+                SearchQuery += "&enablestemming=" + Inputs.EnableStemming.ToString().ToLower();
             }
 
-            if (Inputs.EnablePhonetic.HasValue && Inputs.EnablePhonetic.Value)
+            if (Inputs.TrimDuplicates.HasValue)
             {
-                SearchQuery += "&enablephonetic=" + Inputs.EnablePhonetic;
+                SearchQuery += "&trimduplicates=" + Inputs.TrimDuplicates.ToString().ToLower();
+            }
+
+            if (Inputs.EnableQueryRules.HasValue)
+            {
+                SearchQuery += "&enablequeryrules=" + Inputs.EnableQueryRules.ToString().ToLower();
+            }
+
+            if (Inputs.ProcessBestBets.HasValue)
+            {
+                SearchQuery += "&processbestbets=" + Inputs.ProcessBestBets.ToString().ToLower();
+            }
+
+            if (Inputs.ProcessPersonal.HasValue)
+            {
+                SearchQuery += "&processpersonalfavorites=" + Inputs.ProcessPersonal.ToString().ToLower();
+            }
+
+            if (Inputs.EnableNicknames.HasValue)
+            {
+                SearchQuery += "&enablenicknames=" + Inputs.EnableNicknames.ToString().ToLower();
+            }
+
+            if (Inputs.EnablePhonetic.HasValue)
+            {
+                SearchQuery += "&enablephonetic=" + Inputs.EnablePhonetic.ToString().ToLower();
             }
             
             return RequestUri + SearchQuery;
@@ -1921,11 +1930,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                             res = sr.ReadToEnd();
                         }
 
-                        searchResults = Newtonsoft.Json.JsonConvert.DeserializeObject<RESTSearchResults>(res);
-
-                        //var s = new DataContractJsonSerializer(typeof(ObservableCollection<T>));
-                        //items = (ObservableCollection<T>)s.ReadObject(st);
-                        //Items = items;
+                        searchResults = Newtonsoft.Json.JsonConvert.DeserializeObject<RESTSearchResults>(res);                        
                     }
                 }
             }
