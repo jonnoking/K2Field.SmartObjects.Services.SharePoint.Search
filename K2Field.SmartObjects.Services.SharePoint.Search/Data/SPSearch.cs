@@ -11,6 +11,9 @@ using SourceCode.SharePoint15.Client;
 using Microsoft.SharePoint.Client.Search.Query;
 using Microsoft.SharePoint.Client;
 using Newtonsoft.Json;
+using System.Net;
+using System.IO;
+using System.Globalization;
 
 
 namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
@@ -1244,7 +1247,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             System.Data.DataRow dr;
             try
             {
-                SearchResultsSerialized SerializedResults = null;
+                RESTSearchResultsSerialized SerializedResults = null;
 
                 // if deserializesearchresults
                 var sps = inputs.Where(p => p.Name.Equals("serializedresults", StringComparison.OrdinalIgnoreCase));
@@ -1258,7 +1261,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 
                     //IEnumerable<IDictionary<string, object>> searchResults = JsonConvert.DeserializeObject<IEnumerable<IDictionary<string, object>>>(json.Trim());
 
-                    SerializedResults = JsonConvert.DeserializeObject<SearchResultsSerialized>(json.Trim());
+                    SerializedResults = JsonConvert.DeserializeObject<RESTSearchResultsSerialized>(json.Trim());
 
                     if (string.IsNullOrWhiteSpace(json) || SerializedResults == null)
                     {
@@ -1274,7 +1277,8 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 
                 if (SerializedResults != null)
                 {
-                    foreach (IDictionary<string, object> result in SerializedResults.SearchResults)
+                    // needs updating for REST
+                    foreach (ResultRow result in SerializedResults.SearchResults.Rows)
                     {
                         dr = serviceBroker.ServicePackage.ResultTable.NewRow();
 
@@ -1331,21 +1335,23 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                         dr["tabletype"] = SerializedResults.TableType;
                         dr["spellingsuggestions"] = SerializedResults.SpellingSuggestions;
 
+
                         List<string> missingprops = new List<string>();
-                        foreach (string s in result.Keys)
+                        foreach (ResultCell cell in result.Cells)
                         {
-                            if (dr.Table.Columns.Contains(s.ToLower()))
+                            if (dr.Table.Columns.Contains(cell.Key.ToLower()))
                             {
-                                if (result[s] != null)
+                                if (cell.Value != null)
                                 {
-                                    dr[s.ToLower()] = result[s];
+                                    dr[cell.Key.ToLower()] = cell.Value;
                                 }
                             }
                             else
                             {
-                                missingprops.Add(s);
+                                missingprops.Add(cell.Key);
                             }
                         }
+
                         dr["responsestatus"] = ResponseStatus.Success;
                         serviceBroker.ServicePackage.ResultTable.Rows.Add(dr);
                     }
@@ -1375,7 +1381,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             try
             {
                 //SearchInputs SearchInputs = GetInputs(inputs);
-                SearchResultsSerialized SerializedResults = new SearchResultsSerialized();
+                RESTSearchResultsSerialized SerializedResults = new RESTSearchResultsSerialized();
 
                 SerializedResults = ExecuteSharePointSearch(inputs, required, returns, methodType, serviceObject);
 
@@ -1612,96 +1618,92 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
         }
 
 
-        public SearchResultsSerialized ExecuteSharePointSearch(Property[] inputs, RequiredProperties required, Property[] returns, MethodType methodType, ServiceObject serviceObject)
+        public RESTSearchResultsSerialized ExecuteSharePointSearch(Property[] inputs, RequiredProperties required, Property[] returns, MethodType methodType, ServiceObject serviceObject)
         {
             serviceObject.Properties.InitResultTable();
 
             ClientResult<ResultTableCollection> results = null;
 
             SearchInputs SearchInputs = GetInputs(inputs);
-            SearchResultsSerialized SerializedResults = new SearchResultsSerialized();
+
+            RESTSearchResultsSerialized SerializedResults = new RESTSearchResultsSerialized();
             SerializedResults.Inputs = SearchInputs;
 
-            using (ClientContext clientContext = Utilities.BrokerUtils.InitializeContext(this.Configuration).ClientContext)
+
+                
+            //KeywordQuery keywordQuery = new KeywordQuery(cc);
+            //keywordQuery.QueryText = SearchInputs.Search;
+
+            //SearchExecutor searchExecutor = new SearchExecutor(cc);
+            if (SearchInputs.StartRow.HasValue && SearchInputs.StartRow.Value > -1)
             {
-                KeywordQuery keywordQuery = new KeywordQuery(clientContext);
-                keywordQuery.QueryText = SearchInputs.Search;
+                //keywordQuery.StartRow = SearchInputs.StartRow.Value;
+            }
 
-                SearchExecutor searchExecutor = new SearchExecutor(clientContext);
-                if (SearchInputs.StartRow.HasValue && SearchInputs.StartRow.Value > -1)
+            //keywordQuery.RowsPerPage = int.Parse(txtRowsPerPage.Text);
+            if (SearchInputs.RowLimit.HasValue && SearchInputs.RowLimit.Value > -1)
+            {
+                //keywordQuery.RowLimit = SearchInputs.RowLimit.Value;
+            }
+
+            //keywordQuery.Culture = Configuration.LocaleId;
+
+            if (SearchInputs.SourceId != null && SearchInputs.SourceId != Guid.Empty)
+            {
+                //keywordQuery.SourceId = SearchInputs.SourceId;
+            }
+
+            if (SearchInputs.Sort.Count > 0)
+            {
+                foreach (KeyValuePair<string, SortDirection> s in SearchInputs.Sort)
                 {
-                    keywordQuery.StartRow = SearchInputs.StartRow.Value;
+                    //keywordQuery.SortList.Add(s.Key, s.Value);
+                }
+            }
+
+            if (SearchInputs.EnableNicknames.HasValue && SearchInputs.EnableNicknames.Value)
+            {
+                //keywordQuery.EnableNicknames = SearchInputs.EnableNicknames.Value;
+            }
+
+            if (SearchInputs.EnablePhonetic.HasValue && SearchInputs.EnablePhonetic.Value)
+            {
+                //keywordQuery.EnablePhonetic = SearchInputs.EnablePhonetic.Value;
+            }
+
+
+            // updated for inputs
+            RESTSearchResults res = ExecuteRESTRequest(BuildSearchText(SearchInputs));
+
+
+            if (res != null)
+            {
+                
+                int executiontime = res.ElapsedTime;
+
+                int totalresults = res.PrimaryQueryResult.RelevantResults.TotalRows;
+
+                int resultrows = res.PrimaryQueryResult.RelevantResults.RowCount;
+
+
+                SerializedResults.ResultTitle = res.PrimaryQueryResult.RelevantResults.ResultTitle;
+                SerializedResults.ResultTitleUrl = res.PrimaryQueryResult.RelevantResults.ResultTitleUrl;
+                SerializedResults.SpellingSuggestions = res.SpellingSuggestion;
+                    
+                SerializedResults.SearchResults = res.PrimaryQueryResult.RelevantResults.Table;
+
+
+                // set SourceId from execution results
+                Guid sid = Guid.Empty;
+
+
+                SearchProperty SourceId = res.Properties.Where(p => p.Key.Equals("sourceid", StringComparison.InvariantCultureIgnoreCase)).First();
+                if (SourceId != null && Guid.TryParse(SourceId.Value, out sid))
+                {
+                    SerializedResults.Inputs.SourceId = sid;
                 }
 
-                //keywordQuery.RowsPerPage = int.Parse(txtRowsPerPage.Text);
-                if (SearchInputs.RowLimit.HasValue && SearchInputs.RowLimit.Value > -1)
-                {
-                    keywordQuery.RowLimit = SearchInputs.RowLimit.Value;
-                }
 
-                keywordQuery.Culture = Configuration.LocaleId;
-
-                if (SearchInputs.SourceId != null && SearchInputs.SourceId != Guid.Empty)
-                {
-                    keywordQuery.SourceId = SearchInputs.SourceId;
-                }
-
-                if (SearchInputs.Sort.Count > 0)
-                {
-                    foreach (KeyValuePair<string, SortDirection> s in SearchInputs.Sort)
-                    {
-                        keywordQuery.SortList.Add(s.Key, s.Value);
-                    }
-                }
-
-                if (SearchInputs.EnableNicknames.HasValue && SearchInputs.EnableNicknames.Value)
-                {
-                    keywordQuery.EnableNicknames = SearchInputs.EnableNicknames.Value;
-                }
-
-                if (SearchInputs.EnablePhonetic.HasValue && SearchInputs.EnablePhonetic.Value)
-                {
-                    keywordQuery.EnablePhonetic = SearchInputs.EnablePhonetic.Value;
-                }
-
-                results = searchExecutor.ExecuteQuery(keywordQuery);
-                clientContext.ExecuteQuery();
-
-
-                if (results != null && results.Value[0] != null)
-                {
-
-                    int executiontime = 0;
-                    if (int.TryParse(results.Value[0].Properties["ExecutionTimeMs"].ToString(), out executiontime))
-                    {
-                        SerializedResults.ExecutionTime = executiontime;
-                    }
-
-                    int totalresults = 0;
-                    if (int.TryParse(results.Value[0].TotalRows.ToString(), out totalresults))
-                    {
-                        SerializedResults.TotalRows = totalresults;
-                    }
-
-                    int resultrows = 0;
-                    if (int.TryParse(results.Value[0].ResultRows.Count().ToString(), out resultrows))
-                    {
-                        SerializedResults.ResultRows = resultrows;
-                    }
-                    SerializedResults.ResultTitle = results.Value[0].ResultTitle;
-                    SerializedResults.ResultTitleUrl = results.Value[0].ResultTitleUrl;
-                    SerializedResults.TableType = results.Value[0].TableType;
-                    SerializedResults.SpellingSuggestions = results.Value.SpellingSuggestion;
-                    SerializedResults.SearchResults = results.Value[0].ResultRows;
-
-                    // set SourceId from execution results
-                    Guid sid = Guid.Empty;
-                    if (Guid.TryParse(results.Value.Properties["SourceId"].ToString(), out sid))
-                    {
-                        SerializedResults.Inputs.SourceId = sid;
-                    }
-
-                }
 
             }
 
@@ -1823,6 +1825,138 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             }
 
             return InputValues;
+        }
+
+
+        private string BuildSearchText(SearchInputs Inputs)
+        {
+
+            string RequestUri = Configuration.SiteUrl + "/_api/search/query";
+            string SearchQuery = string.Empty;
+
+            SearchQuery = "?querytext='" + Inputs.Search + "'";
+
+            if (Inputs.StartRow.HasValue && Inputs.StartRow.Value > -1)
+            {
+                SearchQuery += "&startrow=" + Inputs.StartRow;
+            }
+
+            //keywordQuery.RowsPerPage = int.Parse(txtRowsPerPage.Text);
+            if (Inputs.RowLimit.HasValue && Inputs.RowLimit.Value > -1)
+            {
+                SearchQuery += "&rowlimit=" + Inputs.RowLimit;
+            }
+
+            //keywordQuery.Culture = Configuration.LocaleId;
+
+            if (Inputs.SourceId != null && Inputs.SourceId != Guid.Empty)
+            {
+                SearchQuery += "&sourceid='" + Inputs.SourceId + "'";
+            }
+
+            if (Inputs.Sort.Count > 0)
+            {
+                foreach (KeyValuePair<string, SortDirection> s in Inputs.Sort)
+                {
+                    //keywordQuery.SortList.Add(s.Key, s.Value);
+                }
+            }
+
+            if (Inputs.EnableNicknames.HasValue && Inputs.EnableNicknames.Value)
+            {
+                SearchQuery += "&enablenicknames=" + Inputs.EnableNicknames;
+            }
+
+            if (Inputs.EnablePhonetic.HasValue && Inputs.EnablePhonetic.Value)
+            {
+                SearchQuery += "&enablephonetic=" + Inputs.EnablePhonetic;
+            }
+            
+            return RequestUri + SearchQuery;
+        }
+
+
+        private RESTSearchResults ExecuteRESTRequest(string RequestUri)
+        {
+            var res = string.Empty;
+            HttpWebRequest request = null;
+            RESTSearchResults searchResults = null;
+            //List<T> items = new List<T>();
+
+            //string accessToken = Configuration.OAuthToken;
+
+            try
+            {
+                request = (HttpWebRequest)WebRequest.Create(RequestUri);
+                request.Method = "GET";
+                request.Accept = "application/json";
+//                request.Expect = "100-continue";
+                request.Headers.Add("Accept-Encoding", "gzip, deflate");
+
+                if (serviceBroker.Service.ServiceConfiguration.ServiceAuthentication.AuthenticationMode == AuthenticationMode.Impersonate || serviceBroker.Service.ServiceConfiguration.ServiceAuthentication.AuthenticationMode == AuthenticationMode.ServiceAccount)
+                {
+                    request.UseDefaultCredentials = true;
+                }
+                if (serviceBroker.Service.ServiceConfiguration.ServiceAuthentication.AuthenticationMode == AuthenticationMode.OAuth)
+                {
+                    string accessToken = serviceBroker.Service.ServiceConfiguration.ServiceAuthentication.OAuthToken;
+                    string headerBearer = String.Format(CultureInfo.InvariantCulture, "Bearer {0}", accessToken);
+
+                    request.Headers.Add("Authorization", headerBearer.ToString());
+                }
+                if (serviceBroker.Service.ServiceConfiguration.ServiceAuthentication.AuthenticationMode == AuthenticationMode.Static)
+                {
+                    request.Credentials = GetCredentials();//unlikely to work for office 365
+                }
+
+               
+                request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+
+                using (HttpWebResponse Response = (HttpWebResponse)request.GetResponse())
+                {
+                    using (Stream st = Response.GetResponseStream())
+                    {
+                        using (StreamReader sr = new StreamReader(st))
+                        {
+                            res = sr.ReadToEnd();
+                        }
+
+                        searchResults = Newtonsoft.Json.JsonConvert.DeserializeObject<RESTSearchResults>(res);
+
+                        //var s = new DataContractJsonSerializer(typeof(ObservableCollection<T>));
+                        //items = (ObservableCollection<T>)s.ReadObject(st);
+                        //Items = items;
+                    }
+                }
+            }
+            catch (WebException wex)
+            {
+                // should throw exception to force reauth
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                request = null;
+            }
+            return searchResults;
+        }
+
+        private ICredentials GetCredentials()
+        {
+            char[] sp = { '\\' };
+            string[] user = serviceBroker.Service.ServiceConfiguration.ServiceAuthentication.UserName.Split(sp);
+            if (user.Length > 1)
+            {
+                return new NetworkCredential(user[1], serviceBroker.Service.ServiceConfiguration.ServiceAuthentication.Password, user[0]);
+            }
+            else
+            {
+                return new NetworkCredential(serviceBroker.Service.ServiceConfiguration.ServiceAuthentication.UserName, serviceBroker.Service.ServiceConfiguration.ServiceAuthentication.Password);
+            }
         }
 
         #endregion Execute

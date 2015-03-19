@@ -19,4 +19,20 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
         public IEnumerable<IDictionary<string, object>> SearchResults { get; set; }
 
     }
+
+
+    public class RESTSearchResultsSerialized
+    {
+        public SearchInputs Inputs { get; set; }
+        public int? ResultRows { get; set; }
+        public int? TotalRows { get; set; }
+        public int? ExecutionTime { get; set; }
+        public string ResultTitle { get; set; }
+        public string ResultTitleUrl { get; set; }
+        public string SpellingSuggestions { get; set; } // ???
+        public string TableType { get; set; }
+        public Guid QueryId { get; set; }
+        public ResultTable SearchResults { get; set; }
+
+    }
 }

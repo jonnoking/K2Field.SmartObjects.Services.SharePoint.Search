@@ -69,6 +69,7 @@
     <Compile Include="Data\DataConnector.cs" />
     <Compile Include="Data\ResponseStatus.cs" />
     <Compile Include="Data\SearchInputs.cs" />
+    <Compile Include="Data\SearchRestObjects.cs" />
     <Compile Include="Data\SearchResultsSerialized.cs" />
     <Compile Include="Data\SPSearch.cs" />
     <Compile Include="Data\StandardReturns.cs" />
