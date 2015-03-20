@@ -975,6 +975,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
             Search.Validation.RequiredProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "searchsiteurl").First());
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "fileextensions").First());
 
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "sort").First());
@@ -1016,6 +1017,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
             Search.Validation.RequiredProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "searchsiteurl").First());
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "fileextensions").First());
 
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "sort").First());
@@ -1035,6 +1037,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 
 
             Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
+            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "searchsiteurl").First());
             Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "fileextensions").First());
             Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "sort").First());
             Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "sourceid").First());
@@ -1594,6 +1597,19 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                 throw new Exception("Search is a required property");
             }
 
+            string searchsiteurl = string.Empty;
+            var searchsiteurlprop = inputs.Where(p => p.Name.Equals("searchsiteurl", StringComparison.OrdinalIgnoreCase)).First();
+            if (searchsiteurlprop != null && searchsiteurlprop.Value != null && !string.IsNullOrWhiteSpace(searchsiteurlprop.Value.ToString()))
+            {
+                searchsiteurl = searchsiteurlprop.Value.ToString();
+                InputValues.SiteUrl = searchsiteurl;
+            }
+            else
+            {
+                throw new Exception("Search is a required property");
+            }
+
+
             int startRow = -1;
             var startRowProp = inputs.Where(p => p.Name.Equals("startrow", StringComparison.OrdinalIgnoreCase)).First();
             if (startRowProp != null && startRowProp.Value != null && !string.IsNullOrWhiteSpace(startRowProp.Value.ToString()))
@@ -1810,6 +1826,12 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 
             SearchQuery = "?querytext='" + Inputs.Search + "'";
 
+            if (!string.IsNullOrWhiteSpace(Inputs.SiteUrl))
+            {
+                string p = "+path:\"" + Inputs.SiteUrl + "\"";
+                SearchQuery = SearchQuery.Insert(SearchQuery.Length - 1, p);
+            }
+
             SearchQuery += "&culture=" + Configuration.LocaleId;
 
             if (Inputs.StartRow.HasValue && Inputs.StartRow.Value > -1)
@@ -1843,6 +1865,9 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                 else
                 {
                     SearchQuery += "&refiners='filetype,fileextension'&refinementfilters='filetype:or(" + Inputs.FileExtensionsString + ")'";
+                    //serviceBroker.ServicePackage.PageNumber
+                    //serviceBroker.ServicePackage.PageSize;
+                    
                 }                
             }
 

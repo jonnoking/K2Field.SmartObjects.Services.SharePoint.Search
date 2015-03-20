@@ -16,12 +16,15 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
         }
 
         public string Search { get; set; }
+
+        public string Site { get; set; } // to limit scope
+        public string SiteUrl { get; set; }
+
         public int? StartRow { get; set; }
         public int? RowLimit { get; set; }
         public string SortString { get; set; }
         public Dictionary<string, string> Sort { get; set; }
         public Guid SourceId { get; set; }
-
         public bool? EnableStemming { get; set; }
         public bool? TrimDuplicates { get; set; }
         public bool? ProcessPersonal { get; set; }

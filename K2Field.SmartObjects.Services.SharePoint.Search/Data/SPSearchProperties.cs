@@ -23,6 +23,15 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             };
             ContainerProperties.Add(search);
 
+            Property searchsite = new Property
+            {
+                Name = "searchsiteurl",
+                MetaData = new MetaData("Search Site Url", "Search Site Url"),
+                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+                Type = "System.String"
+            };
+            ContainerProperties.Add(searchsite);
+
             Property startrow = new Property
             {
                 Name = "startrow",
