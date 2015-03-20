@@ -14,12 +14,12 @@ using System.Globalization;
 
 namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 {
-    public class SPSearch
+    public class SPSearchUser
     {
         private ServiceAssemblyBase serviceBroker = null;
         private Configuration Configuration { get; set; }
 
-        public SPSearch(ServiceAssemblyBase serviceBroker, Configuration configuration)
+        public SPSearchUser(ServiceAssemblyBase serviceBroker, Configuration configuration)
         {
             // Set local serviceBroker variable.
             this.serviceBroker = serviceBroker;
@@ -35,8 +35,8 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             List<Property> SPSearchProps = GetSPSearchProperties();
 
             ServiceObject SPSearchServiceObject = new ServiceObject();
-            SPSearchServiceObject.Name = "spsearch";
-            SPSearchServiceObject.MetaData.DisplayName = "SharePoint Search";
+            SPSearchServiceObject.Name = "spsearchuser";
+            SPSearchServiceObject.MetaData.DisplayName = "SharePoint Search User";
 
             SPSearchServiceObject.MetaData.ServiceProperties.Add("objecttype", "search");
 
@@ -53,8 +53,6 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             SPSearchServiceObject.Methods.Add(CreateSearch(SPSearchProps));
             SPSearchServiceObject.Methods.Add(CreateSearchRead(SPSearchProps));
             SPSearchServiceObject.Methods.Add(CreateDeserializeSearchResults(SPSearchProps));
-            SPSearchServiceObject.Methods.Add(CreateListSourceIds(SPSearchProps));
-            SPSearchServiceObject.Methods.Add(CreateListOtherSourceIds(SPSearchProps));
 
             serviceBroker.Service.ServiceObjects.Add(SPSearchServiceObject);
         }
@@ -65,7 +63,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 
             ContainerProperties.AddRange(SPSearchProperties.GetSearchInputProperties());
             ContainerProperties.AddRange(SPSearchProperties.GetSearchResultSummaryProperties());
-            ContainerProperties.AddRange(SPSearchProperties.GetSearchResultsProperties());
+            ContainerProperties.AddRange(SPSearchProperties.GetStandardSearchReturnProperties());
             ContainerProperties.AddRange(SPSearchProperties.GetUserSearchResultProperties());
             ContainerProperties.AddRange(StandardReturns.GetStandardReturnProperties());
 
@@ -75,29 +73,17 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
         private Method CreateSearch(List<Property> SPSearchProps)
         {
             Method Search = new Method();
-            Search.Name = "spsearch";
-            Search.MetaData.DisplayName = "Search";
+            Search.Name = "spsearchusers";
+            Search.MetaData.DisplayName = "Search Users";
             Search.Type = MethodType.List;
 
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
             Search.Validation.RequiredProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "searchsiteurl").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "fileextensions").First());
 
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "sort").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "sourceid").First());
 
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "startrow").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "rowlimit").First()); 
-            
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "enablestemming").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "trimduplicates").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "enablequeryrules").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "processbestbets").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "processpersonal").First());
-            
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "enablenicknames").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "enablephonetic").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "rowlimit").First());
 
             foreach (Property prop in SPSearchProps)
             {
@@ -111,53 +97,38 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                 Search.ReturnProperties.Remove("serializedresults");
             }
 
+            Search.ReturnProperties.Remove("enablestemming");
+            Search.ReturnProperties.Remove("trimduplicates");
+            Search.ReturnProperties.Remove("enablequeryrules");
+            Search.ReturnProperties.Remove("processbestbets");
+            Search.ReturnProperties.Remove("processpersonal");
+
+            Search.ReturnProperties.Remove("enablenicknames");
+            Search.ReturnProperties.Remove("enablephonetic");
+
+
             return Search;
         }
 
         private Method CreateSearchRead(List<Property> SPSearchProps)
         {
             Method Search = new Method();
-            Search.Name = "spsearchread";
-            Search.MetaData.DisplayName = "Search Read";
+            Search.Name = "spsearchusersread";
+            Search.MetaData.DisplayName = "Search Users Read";
             Search.Type = MethodType.Read;
 
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
             Search.Validation.RequiredProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "searchsiteurl").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "fileextensions").First());
-
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "sort").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "sourceid").First());
 
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "startrow").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "rowlimit").First()); 
-            
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "enablestemming").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "trimduplicates").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "enablequeryrules").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "processbestbets").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "processpersonal").First());
-
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "enablenicknames").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "enablephonetic").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "rowlimit").First());
 
 
             Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
-            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "searchsiteurl").First());
-            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "fileextensions").First());
             Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "sort").First());
-            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "sourceid").First());
             Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "startrow").First());
             Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "rowlimit").First());
-
-            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "enablestemming").First());
-            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "trimduplicates").First());
-            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "enablequeryrules").First());
-            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "processbestbets").First());
-            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "processpersonal").First());
-
-            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "enablenicknames").First());
-            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "enablephonetic").First());
 
             Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "executiontime").First());
             Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "resultrows").First());
@@ -169,6 +140,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "serializedresults").First());
             Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "responsestatus").First());
             Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "responsestatusdescription").First());
+
 
             return Search;
         }
@@ -192,33 +164,17 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             if (Search.ReturnProperties.Contains("serializedresults"))
             {
                 Search.ReturnProperties.Remove("serializedresults");
+
+                Search.ReturnProperties.Remove("enablestemming");
+                Search.ReturnProperties.Remove("trimduplicates");
+                Search.ReturnProperties.Remove("enablequeryrules");
+                Search.ReturnProperties.Remove("processbestbets");
+                Search.ReturnProperties.Remove("processpersonal");
+
+                Search.ReturnProperties.Remove("enablenicknames");
+                Search.ReturnProperties.Remove("enablephonetic");
+
             }
-
-            return Search;
-        }
-
-        private Method CreateListSourceIds(List<Property> SPSearchProps)
-        {
-            Method Search = new Method();
-            Search.Name = "listsourceidsstatic";
-            Search.MetaData.DisplayName = "List Source Ids Static";
-            Search.Type = MethodType.List;
-
-            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "sourceid").First());
-            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "sourcename").First());
-
-            return Search;
-        }
-
-        private Method CreateListOtherSourceIds(List<Property> SPSearchProps)
-        {
-            Method Search = new Method();
-            Search.Name = "listothersourceidsstatic";
-            Search.MetaData.DisplayName = "List Other Source Ids Static";
-            Search.Type = MethodType.List;
-
-            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "sourceid").First());
-            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "sourcename").First());
 
             return Search;
         }
@@ -260,7 +216,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                 else
                 {
                     // if Search
-                    SerializedResults = Utilities.BrokerUtils.ExecuteSharePointSearch(inputs, required, Configuration, serviceBroker);
+                    SerializedResults = Utilities.BrokerUtils.ExecuteSharePointUserSearch(inputs, required, Configuration, serviceBroker);
                 }
 
                 if (SerializedResults != null)
@@ -308,7 +264,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                         if (SerializedResults.ExecutionTime.HasValue)
                         {
                             dr["executiontime"] = SerializedResults.ExecutionTime.Value;
-                            
+
                         }
 
                         if (SerializedResults.ResultRows.HasValue)
@@ -368,10 +324,9 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 
             try
             {
-                //SearchInputs SearchInputs = GetInputs(inputs);
                 RESTSearchResultsSerialized SerializedResults = new RESTSearchResultsSerialized();
 
-                SerializedResults = Utilities.BrokerUtils.ExecuteSharePointSearch(inputs, required, Configuration, serviceBroker);
+                SerializedResults = Utilities.BrokerUtils.ExecuteSharePointUserSearch(inputs, required, Configuration, serviceBroker);
 
                 if (SerializedResults != null)
                 {
@@ -482,68 +437,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             serviceObject.Properties.BindPropertiesToResultTable();
         }
 
-
-        public void ExecuteListSourceIds(Property[] inputs, RequiredProperties required, Property[] returns, MethodType methodType, ServiceObject serviceObject)
-        {
-            serviceObject.Properties.InitResultTable();
-            System.Data.DataRow dr;
-
-            Dictionary<string, string> SourceIds = new Dictionary<string, string>();
-            SourceIds.Add("8413cd39-2156-4e00-b54d-11efd9abdb89", "Local SharePoint Results");
-            SourceIds.Add("b09a7990-05ea-4af9-81ef-edfab16c4e31", "Local People Results");
-            SourceIds.Add("203fba36-2763-4060-9931-911ac8c0583b", "Local Reports And Data Results");
-            SourceIds.Add("78b793ce-7956-4669-aa3b-451fc5defebf", "Local Video Results");
-            SourceIds.Add("e7ec8cee-ded8-43c9-beb5-436b54b31e84", "Documents");
-            SourceIds.Add("5dc9f503-801e-4ced-8a2c-5d1237132419", "Items matching a content type");
-            SourceIds.Add("e1327b9c-2b8c-4b23-99c9-3730cb29c3f7", "Items matching a tag");
-            SourceIds.Add("48fec42e-4a92-48ce-8363-c2703a40e67d", "Items related to current user");
-            SourceIds.Add("5c069288-1d17-454a-8ac6-9c642a065f48", "Items with same keyword as this item");
-            SourceIds.Add("5e34578e-4d08-4edc-8bf3-002acf3cdbcc", "Pages");
-            SourceIds.Add("38403c8c-3975-41a8-826e-717f2d41568a", "Pictures");
-            SourceIds.Add("97c71db1-58ce-4891-8b64-585bc2326c12", "Popular");
-            SourceIds.Add("ba63bbae-fa9c-42c0-b027-9a878f16557c", "Recently changed items");
-            SourceIds.Add("ec675252-14fa-4fbe-84dd-8d098ed74181", "Recommended Items");
-            SourceIds.Add("9479bf85-e257-4318-b5a8-81a180f5faa1", "Wiki");
-
-            foreach (var Source in SourceIds)
-            {
-                dr = serviceBroker.ServicePackage.ResultTable.NewRow();
-                Guid sid = Guid.Empty;
-                if (Guid.TryParse(Source.Key, out sid))
-                {
-                    dr["sourceid"] = sid;
-                    dr["sourcename"] = Source.Value;
-                }
-                serviceBroker.ServicePackage.ResultTable.Rows.Add(dr);
-            }
-
-        }
-
-        public void ExecuteListOtherSourceIds(Property[] inputs, RequiredProperties required, Property[] returns, MethodType methodType, ServiceObject serviceObject)
-        {
-            serviceObject.Properties.InitResultTable();
-            System.Data.DataRow dr;
-
-            Dictionary<string, string> SourceIds = new Dictionary<string, string>();
-            SourceIds.Add("64cde128-76be-4943-b960-146e613a7e1e", "InternetSearchResults");
-            SourceIds.Add("1dd9c4dc-8a6a-48a2-88b7-54dc3d97bf15", "InternetSearchSuggestions");
-            SourceIds.Add("495318b6-0d9a-4d0f-939b-41cc17b49abd", "LocalPeopleSearchIndex");
-            SourceIds.Add("5b557a96-b0ef-443c-8f55-fdcceb1e142a", "LocalSearchIndex");
-
-            foreach (var Source in SourceIds)
-            {
-                dr = serviceBroker.ServicePackage.ResultTable.NewRow();
-                Guid sid = Guid.Empty;
-                if (Guid.TryParse(Source.Key, out sid))
-                {
-                    dr["sourceid"] = sid;
-                    dr["sourcename"] = Source.Value;
-                }
-                serviceBroker.ServicePackage.ResultTable.Rows.Add(dr);
-            }
-
-        }
-        
+      
         #endregion Execute
 
     }

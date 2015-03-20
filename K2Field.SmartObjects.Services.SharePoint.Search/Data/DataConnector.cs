@@ -9,7 +9,6 @@ using SourceCode.SmartObjects.Services.ServiceSDK.Objects;
 using SourceCode.SmartObjects.Services.ServiceSDK.Types;
 
 using K2Field.SmartObjects.Services.SharePoint.Search.Interfaces;
-using SourceCode.SharePoint15.Client;
 using SourceCode.Web.Utilities;
 using System.Xml;
 using K2Field.SmartObjects.Services.SharePoint.Search.Properties;
@@ -200,7 +199,8 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 
             SPSearch search = new SPSearch(serviceBroker, Configuration);
             search.Create();
-
+            SPSearchUser usersearch = new SPSearchUser(serviceBroker, Configuration);
+            usersearch.Create();
         }
 
         #endregion
@@ -287,6 +287,19 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             {
                 SPSearch spsearch = new SPSearch(serviceBroker, this.Configuration);
                 spsearch.ExecuteListOtherSourceIds(inputs, required, returns, methodType, serviceObject);
+            }
+
+
+            if (serviceObject.Methods[0].Name.Equals("spsearchusers"))
+            {
+                SPSearchUser spsearchuser = new SPSearchUser(serviceBroker, this.Configuration);
+                spsearchuser.ExecuteSearch(inputs, required, returns, methodType, serviceObject);
+            }
+
+            if (serviceObject.Methods[0].Name.Equals("spsearchusersread"))
+            {
+                SPSearchUser spsearchuser = new SPSearchUser(serviceBroker, this.Configuration);
+                spsearchuser.ExecuteSearch(inputs, required, returns, methodType, serviceObject);
             }
 
         }

@@ -185,41 +185,41 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             };
             ContainerProperties.Add(totalrows);
 
-            Property ResultsTitle = new Property
-            {
-                Name = "resulttitle",
-                MetaData = new MetaData("Result Title", "Results Title"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(ResultsTitle);
+            //Property ResultsTitle = new Property
+            //{
+            //    Name = "resulttitle",
+            //    MetaData = new MetaData("Result Title", "Results Title"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(ResultsTitle);
 
-            Property ResultsTitleUrl = new Property
-            {
-                Name = "resulttitleurl",
-                MetaData = new MetaData("Result Title Url", "Result Title Url"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(ResultsTitleUrl);
+            //Property ResultsTitleUrl = new Property
+            //{
+            //    Name = "resulttitleurl",
+            //    MetaData = new MetaData("Result Title Url", "Result Title Url"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(ResultsTitleUrl);
 
-            Property SpellingSuggestions = new Property
-            {
-                Name = "spellingsuggestions",
-                MetaData = new MetaData("Spelling Suggestions", "Spelling Suggestions"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(SpellingSuggestions);
+            //Property SpellingSuggestions = new Property
+            //{
+            //    Name = "spellingsuggestions",
+            //    MetaData = new MetaData("Spelling Suggestions", "Spelling Suggestions"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(SpellingSuggestions);
 
-            Property TableType = new Property
-            {
-                Name = "tabletype",
-                MetaData = new MetaData("Table Type", "Table Type"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(TableType);
+            //Property TableType = new Property
+            //{
+            //    Name = "tabletype",
+            //    MetaData = new MetaData("Table Type", "Table Type"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(TableType);
 
 
             Property SerializedResults = new Property
@@ -234,7 +234,17 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             return ContainerProperties;
         }
 
-        public static List<Property> GetSearchResultReturnProperties()
+        public static List<Property> GetSearchResultsProperties()
+        {
+            List<Property> ContainerProperties = new List<Property>();
+
+            ContainerProperties.AddRange(GetStandardSearchReturnProperties());
+            ContainerProperties.AddRange(GetSearchResultReturnProperties());
+
+            return ContainerProperties.OrderBy(p => p.MetaData.DisplayName).ToList();
+        }
+
+        public static List<Property> GetStandardSearchReturnProperties()
         {
             List<Property> ContainerProperties = new List<Property>();
 
@@ -246,6 +256,24 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                 Type = "System.String"
             };
             ContainerProperties.Add(rank);
+
+            Property lastmodifiedtime = new Property
+            {
+                Name = "lastmodifiedtime",
+                MetaData = new MetaData("LastModifiedTime", "LastModifiedTime"),
+                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.DateTime,
+                Type = "System.DateTime"
+            };
+            ContainerProperties.Add(lastmodifiedtime);
+
+            Property path = new Property
+            {
+                Name = "path",
+                MetaData = new MetaData("Path", "Path"),
+                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+                Type = "System.String"
+            };
+            ContainerProperties.Add(path);
 
             Property docid = new Property
             {
@@ -264,6 +292,22 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                 Type = "System.String"
             };
             ContainerProperties.Add(workid);
+
+            Property originalpath = new Property
+            {
+                Name = "originalpath",
+                MetaData = new MetaData("OriginalPath", "OriginalPath"),
+                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+                Type = "System.String"
+            };
+            ContainerProperties.Add(originalpath);
+
+            return ContainerProperties;
+        }
+
+        public static List<Property> GetSearchResultReturnProperties()
+        {
+            List<Property> ContainerProperties = new List<Property>();            
 
             Property title = new Property
             {
@@ -292,15 +336,6 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             };
             ContainerProperties.Add(size);
 
-            Property path = new Property
-            {
-                Name = "path",
-                MetaData = new MetaData("Path", "Path"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(path);
-
             Property description = new Property
             {
                 Name = "description",
@@ -319,14 +354,14 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             };
             ContainerProperties.Add(write);
 
-            Property collapsingstatus = new Property
-            {
-                Name = "collapsingstatus",
-                MetaData = new MetaData("CollapsingStatus", "CollapsingStatus"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(collapsingstatus);
+            //Property collapsingstatus = new Property
+            //{
+            //    Name = "collapsingstatus",
+            //    MetaData = new MetaData("CollapsingStatus", "CollapsingStatus"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(collapsingstatus);
 
             Property hithighlightedsummary = new Property
             {
@@ -346,14 +381,14 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             };
             ContainerProperties.Add(hithighlightedproperties);
 
-            Property contentclass = new Property
-            {
-                Name = "contentclass",
-                MetaData = new MetaData("contentclass", "contentclass"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(contentclass);
+            //Property contentclass = new Property
+            //{
+            //    Name = "contentclass",
+            //    MetaData = new MetaData("contentclass", "contentclass"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(contentclass);
 
             Property picturethumbnailurl = new Property
             {
@@ -445,14 +480,14 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             };
             ContainerProperties.Add(sectionnames);
 
-            Property sectionindexes = new Property
-            {
-                Name = "sectionindexes",
-                MetaData = new MetaData("SectionIndexes", "SectionIndexes"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(sectionindexes);
+            //Property sectionindexes = new Property
+            //{
+            //    Name = "sectionindexes",
+            //    MetaData = new MetaData("SectionIndexes", "SectionIndexes"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(sectionindexes);
 
             Property sitelogo = new Property
             {
@@ -508,15 +543,6 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             };
             ContainerProperties.Add(isdocument);
 
-            Property lastmodifiedtime = new Property
-            {
-                Name = "lastmodifiedtime",
-                MetaData = new MetaData("LastModifiedTime", "LastModifiedTime"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.DateTime,
-                Type = "System.DateTime"
-            };
-            ContainerProperties.Add(lastmodifiedtime);
-
             Property filetype = new Property
             {
                 Name = "filetype",
@@ -553,32 +579,23 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             };
             ContainerProperties.Add(secondaryfileextension);
 
-            Property docaclmeta = new Property
-            {
-                Name = "docaclmeta",
-                MetaData = new MetaData("docaclmeta", "docaclmeta"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(docaclmeta);
+            //Property docaclmeta = new Property
+            //{
+            //    Name = "docaclmeta",
+            //    MetaData = new MetaData("docaclmeta", "docaclmeta"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(docaclmeta);
 
-            Property originalpath = new Property
-            {
-                Name = "originalpath",
-                MetaData = new MetaData("OriginalPath", "OriginalPath"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(originalpath);
-
-            Property editorowsuser = new Property
-            {
-                Name = "editorowsuser",
-                MetaData = new MetaData("EditorOWSUSER", "EditorOWSUSER"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(editorowsuser);
+            //Property editorowsuser = new Property
+            //{
+            //    Name = "editorowsuser",
+            //    MetaData = new MetaData("EditorOWSUSER", "EditorOWSUSER"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(editorowsuser);
 
             Property displayauthor = new Property
             {
@@ -643,23 +660,23 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             };
             ContainerProperties.Add(postauthor);
 
-            Property rootpostownerid = new Property
-            {
-                Name = "rootpostownerid",
-                MetaData = new MetaData("RootPostOwnerID", "RootPostOwnerID"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(rootpostownerid);
+            //Property rootpostownerid = new Property
+            //{
+            //    Name = "rootpostownerid",
+            //    MetaData = new MetaData("RootPostOwnerID", "RootPostOwnerID"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(rootpostownerid);
 
-            Property rootpostid = new Property
-            {
-                Name = "rootpostid",
-                MetaData = new MetaData("RootPostID", "RootPostID"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(rootpostid);
+            //Property rootpostid = new Property
+            //{
+            //    Name = "rootpostid",
+            //    MetaData = new MetaData("RootPostID", "RootPostID"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(rootpostid);
 
             Property attachmenttype = new Property
             {
@@ -697,14 +714,14 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             };
             ContainerProperties.Add(modifiedby);
 
-            Property rootpostuniqueid = new Property
-            {
-                Name = "rootpostuniqueid",
-                MetaData = new MetaData("RootPostUniqueID", "RootPostUniqueID"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(rootpostuniqueid);
+            //Property rootpostuniqueid = new Property
+            //{
+            //    Name = "rootpostuniqueid",
+            //    MetaData = new MetaData("RootPostUniqueID", "RootPostUniqueID"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(rootpostuniqueid);
 
             Property tags = new Property
             {
@@ -715,68 +732,68 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             };
             ContainerProperties.Add(tags);
 
-            Property resulttypeidlist = new Property
-            {
-                Name = "resulttypeidlist",
-                MetaData = new MetaData("ResultTypeIdList", "ResultTypeIdList"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(resulttypeidlist);
+            //Property resulttypeidlist = new Property
+            //{
+            //    Name = "resulttypeidlist",
+            //    MetaData = new MetaData("ResultTypeIdList", "ResultTypeIdList"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(resulttypeidlist);
 
-            Property partitionid = new Property
-            {
-                Name = "partitionid",
-                MetaData = new MetaData("PartitionId", "PartitionId"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(partitionid);
+            //Property partitionid = new Property
+            //{
+            //    Name = "partitionid",
+            //    MetaData = new MetaData("PartitionId", "PartitionId"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(partitionid);
 
-            Property urlzone = new Property
-            {
-                Name = "urlzone",
-                MetaData = new MetaData("UrlZone", "UrlZone"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(urlzone);
+            //Property urlzone = new Property
+            //{
+            //    Name = "urlzone",
+            //    MetaData = new MetaData("UrlZone", "UrlZone"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(urlzone);
 
-            Property aamenabledmanagedproperties = new Property
-            {
-                Name = "aamenabledmanagedproperties",
-                MetaData = new MetaData("AAMEnabledManagedProperties", "AAMEnabledManagedProperties"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(aamenabledmanagedproperties);
+            //Property aamenabledmanagedproperties = new Property
+            //{
+            //    Name = "aamenabledmanagedproperties",
+            //    MetaData = new MetaData("AAMEnabledManagedProperties", "AAMEnabledManagedProperties"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(aamenabledmanagedproperties);
 
-            Property resulttypeid = new Property
-            {
-                Name = "resulttypeid",
-                MetaData = new MetaData("ResultTypeId", "ResultTypeId"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(resulttypeid);
+            //Property resulttypeid = new Property
+            //{
+            //    Name = "resulttypeid",
+            //    MetaData = new MetaData("ResultTypeId", "ResultTypeId"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(resulttypeid);
 
-            Property rendertemplateid = new Property
-            {
-                Name = "rendertemplateid",
-                MetaData = new MetaData("RenderTemplateId", "RenderTemplateId"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(rendertemplateid);
+            //Property rendertemplateid = new Property
+            //{
+            //    Name = "rendertemplateid",
+            //    MetaData = new MetaData("RenderTemplateId", "RenderTemplateId"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(rendertemplateid);
 
-            Property pisearchresultid = new Property
-            {
-                Name = "pisearchresultid",
-                MetaData = new MetaData("piSearchResultId", "piSearchResultId"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(pisearchresultid);
+            //Property pisearchresultid = new Property
+            //{
+            //    Name = "pisearchresultid",
+            //    MetaData = new MetaData("piSearchResultId", "piSearchResultId"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(pisearchresultid);
 
             return ContainerProperties.OrderBy(p => p.MetaData.DisplayName).ToList();
 
@@ -895,14 +912,14 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             };
             ContainerProperties.Add(pastprojects);
 
-            Property path = new Property
-            {
-                Name = "path",
-                MetaData = new MetaData("Path", "Path"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(path);
+            //Property path = new Property
+            //{
+            //    Name = "path",
+            //    MetaData = new MetaData("Path", "Path"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(path);
 
             Property pictureurl = new Property
             {
@@ -940,14 +957,14 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             };
             ContainerProperties.Add(schools);
 
-            Property serviceapplicationid = new Property
-            {
-                Name = "serviceapplicationid",
-                MetaData = new MetaData("ServiceApplicationID", "ServiceApplicationID"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(serviceapplicationid);
+            //Property serviceapplicationid = new Property
+            //{
+            //    Name = "serviceapplicationid",
+            //    MetaData = new MetaData("ServiceApplicationID", "ServiceApplicationID"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(serviceapplicationid);
 
             Property sipaddress = new Property
             {
@@ -1003,23 +1020,23 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             };
             ContainerProperties.Add(yomidisplayname);
 
-            Property docaclmeta = new Property
-            {
-                Name = "docaclmeta",
-                MetaData = new MetaData("docaclmeta", "docaclmeta"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(docaclmeta);
+            //Property docaclmeta = new Property
+            //{
+            //    Name = "docaclmeta",
+            //    MetaData = new MetaData("docaclmeta", "docaclmeta"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(docaclmeta);
 
-            Property originalpath = new Property
-            {
-                Name = "originalpath",
-                MetaData = new MetaData("OriginalPath", "OriginalPath"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(originalpath);
+            //Property originalpath = new Property
+            //{
+            //    Name = "originalpath",
+            //    MetaData = new MetaData("OriginalPath", "OriginalPath"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(originalpath);
 
             Property resulttypeidlist = new Property
             {
@@ -1030,14 +1047,14 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             };
             ContainerProperties.Add(resulttypeidlist);
 
-            Property partitionid = new Property
-            {
-                Name = "partitionid",
-                MetaData = new MetaData("PartitionId", "PartitionId"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(partitionid);
+            //Property partitionid = new Property
+            //{
+            //    Name = "partitionid",
+            //    MetaData = new MetaData("PartitionId", "PartitionId"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(partitionid);
 
             Property urlzone = new Property
             {
@@ -1048,23 +1065,23 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             };
             ContainerProperties.Add(urlzone);
 
-            Property aamenabledmanagedproperties = new Property
-            {
-                Name = "aamenabledmanagedproperties",
-                MetaData = new MetaData("AAMEnabledManagedProperties", "AAMEnabledManagedProperties"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(aamenabledmanagedproperties);
+            //Property aamenabledmanagedproperties = new Property
+            //{
+            //    Name = "aamenabledmanagedproperties",
+            //    MetaData = new MetaData("AAMEnabledManagedProperties", "AAMEnabledManagedProperties"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(aamenabledmanagedproperties);
 
-            Property resulttypeid = new Property
-            {
-                Name = "resulttypeid",
-                MetaData = new MetaData("ResultTypeId", "ResultTypeId"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(resulttypeid);
+            //Property resulttypeid = new Property
+            //{
+            //    Name = "resulttypeid",
+            //    MetaData = new MetaData("ResultTypeId", "ResultTypeId"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(resulttypeid);
 
             Property editprofileurl = new Property
             {
@@ -1102,23 +1119,23 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             };
             ContainerProperties.Add(profilequeriesfoundyou);
 
-            Property rendertemplateid = new Property
-            {
-                Name = "rendertemplateid",
-                MetaData = new MetaData("RenderTemplateId", "RenderTemplateId"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(rendertemplateid);
+            //Property rendertemplateid = new Property
+            //{
+            //    Name = "rendertemplateid",
+            //    MetaData = new MetaData("RenderTemplateId", "RenderTemplateId"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(rendertemplateid);
 
-            Property pisearchresultid = new Property
-            {
-                Name = "pisearchresultid",
-                MetaData = new MetaData("piSearchResultId", "piSearchResultId"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(pisearchresultid);
+            //Property pisearchresultid = new Property
+            //{
+            //    Name = "pisearchresultid",
+            //    MetaData = new MetaData("piSearchResultId", "piSearchResultId"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(pisearchresultid);
 
 
             return ContainerProperties.OrderBy(p => p.MetaData.DisplayName).ToList();

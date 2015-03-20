@@ -30,24 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.SharePoint.Client, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\K2Field.Services.SharePoint.Search.Test\libs\Microsoft.SharePoint.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.SharePoint.Client.Runtime, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\K2Field.Services.SharePoint.Search.Test\libs\Microsoft.SharePoint.Client.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.SharePoint.Client.Search, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\K2Field.Services.SharePoint.Search.Test\libs\Microsoft.SharePoint.Client.Search.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\K2Field.Services.SharePoint.Search.Test\libs\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="SourceCode.SharePoint15.Client">
-      <HintPath>..\K2Field.Services.SharePoint.Search.Test\libs\SourceCode.SharePoint15.Client.dll</HintPath>
     </Reference>
     <Reference Include="SourceCode.SmartObjects.Services.ServiceSDK">
       <HintPath>..\..\..\..\..\K2-Dynamics-CRM-Extensions\K2.Demo.CRM\K2 Libraries\SourceCode.SmartObjects.Services.ServiceSDK.dll</HintPath>
@@ -68,12 +53,13 @@
     <Compile Include="Data\Configuration.cs" />
     <Compile Include="Data\DataConnector.cs" />
     <Compile Include="Data\ResponseStatus.cs" />
-    <Compile Include="Data\SPSearchDocuments.cs" />
+    <None Include="Data\SPSearchDocuments.cs" />
     <Compile Include="Data\SearchInputs.cs" />
     <Compile Include="Data\SearchRestObjects.cs" />
     <Compile Include="Data\SearchResultsSerialized.cs" />
     <Compile Include="Data\SPSearch.cs" />
     <Compile Include="Data\SPSearchProperties.cs" />
+    <Compile Include="Data\SPSearchUser.cs" />
     <Compile Include="Data\StandardReturns.cs" />
     <Compile Include="Interfaces\IDataConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
