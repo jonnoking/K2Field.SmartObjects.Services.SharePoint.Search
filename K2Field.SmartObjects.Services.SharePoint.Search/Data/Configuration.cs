@@ -8,6 +8,8 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 {
     public class Configuration
     {
+        public bool AdvancedSearchOptions
+        { get; set; }
         public string AdminSiteUrl
         {
             get;

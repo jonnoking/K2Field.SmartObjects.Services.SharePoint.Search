@@ -57,8 +57,11 @@
     <Compile Include="Data\SearchInputs.cs" />
     <Compile Include="Data\SearchRestObjects.cs" />
     <Compile Include="Data\SearchResultsSerialized.cs" />
+    <Compile Include="Data\SPExecute.cs" />
     <Compile Include="Data\SPSearch.cs" />
+    <Compile Include="Data\SPSearchDocument.cs" />
     <Compile Include="Data\SPSearchProperties.cs" />
+    <Compile Include="Data\SPSearchSource.cs" />
     <Compile Include="Data\SPSearchUser.cs" />
     <Compile Include="Data\StandardReturns.cs" />
     <Compile Include="Interfaces\IDataConnector.cs" />

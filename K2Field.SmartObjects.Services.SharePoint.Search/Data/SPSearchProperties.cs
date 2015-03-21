@@ -10,7 +10,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
     public class SPSearchProperties
     {
 
-        public static List<Property> GetSearchInputProperties()
+        public static List<Property> GetCoreSearchInputProperties()
         {
             List<Property> ContainerProperties = new List<Property>();
 
@@ -31,6 +31,24 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                 Type = "System.String"
             };
             ContainerProperties.Add(searchsite);
+
+            Property fileextensionfilter = new Property
+            {
+                Name = "fileextensionsfilter",
+                MetaData = new MetaData("File Extensions", "File Extensions"),
+                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+                Type = "System.String"
+            };
+            ContainerProperties.Add(fileextensionfilter);
+
+            Property sourceid = new Property
+            {
+                Name = "sourceid",
+                MetaData = new MetaData("Source Id", "Source Id"),
+                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Guid,
+                Type = "System.Guid"
+            };
+            ContainerProperties.Add(sourceid);
 
             Property properties = new Property
             {
@@ -67,6 +85,14 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                 Type = "System.String"
             };
             ContainerProperties.Add(sort);
+
+
+            return ContainerProperties;
+        }
+
+        public static List<Property> GetAdvancedSearchInputProperties()
+        {
+            List<Property> ContainerProperties = new List<Property>();            
 
             Property enablephonetic = new Property
             {
@@ -130,35 +156,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                 SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.YesNo,
                 Type = "System.Boolean"
             };
-            ContainerProperties.Add(processpersonal);
-
-            Property sourceid = new Property
-            {
-                Name = "sourceid",
-                MetaData = new MetaData("Source Id", "Source Id"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Guid,
-                Type = "System.Guid"
-            };
-            ContainerProperties.Add(sourceid);
-
-            Property sourcename = new Property
-            {
-                Name = "sourcename",
-                MetaData = new MetaData("Source Name", "Source Name"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(sourcename);
-
-
-            Property fileextensions = new Property
-            {
-                Name = "fileextensions",
-                MetaData = new MetaData("File Extensions", "File Extensions"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(fileextensions);
+            ContainerProperties.Add(processpersonal);                                
 
             return ContainerProperties;
         }
@@ -230,6 +228,15 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             //};
             //ContainerProperties.Add(TableType);
 
+            //required for static search type methods
+            Property sourcename = new Property
+            {
+                Name = "sourcename",
+                MetaData = new MetaData("Source Name", "Source Name"),
+                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+                Type = "System.String"
+            };
+            ContainerProperties.Add(sourcename);
 
             Property SerializedResults = new Property
             {
@@ -243,18 +250,42 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             return ContainerProperties;
         }
 
-        public static List<Property> GetSearchResultsProperties()
+        //for SPSearch
+        public static List<Property> GetAllSearchResultsProperties()
+        {
+            List<Property> ContainerProperties = GetContentSearchResultsProperties();
+
+            // attach user properties to the end regardless of alphabetic order
+            ContainerProperties.AddRange(GetUserSpecificSearchResultProperties().OrderBy(p => p.MetaData.DisplayName).ToList());
+
+            return ContainerProperties;
+        }
+        
+        //for SPSearchDocument
+        public static List<Property> GetContentSearchResultsProperties()
         {
             List<Property> ContainerProperties = new List<Property>();
 
-            ContainerProperties.AddRange(GetStandardSearchReturnProperties());
-            ContainerProperties.AddRange(GetSearchResultReturnProperties());
+            ContainerProperties.AddRange(GetCoreSearchReturnProperties());
+            ContainerProperties.AddRange(GetGeneralSearchResultReturnProperties());
             ContainerProperties.AddRange(GetGraphSearchResultProperties());
 
             return ContainerProperties.OrderBy(p => p.MetaData.DisplayName).ToList();
         }
 
-        public static List<Property> GetStandardSearchReturnProperties()
+        //for SPSearchUser
+        public static List<Property> GetUserSearchResultProperties()
+        {
+            List<Property> ContainerProperties = new List<Property>();
+
+            ContainerProperties.AddRange(GetCoreSearchReturnProperties());
+            ContainerProperties.AddRange(GetUserSpecificSearchResultProperties());
+            ContainerProperties.AddRange(GetGraphSearchResultProperties());
+
+            return ContainerProperties.OrderBy(p => p.MetaData.DisplayName).ToList();
+        }
+
+        private static List<Property> GetCoreSearchReturnProperties()
         {
             List<Property> ContainerProperties = new List<Property>();
 
@@ -315,7 +346,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             return ContainerProperties;
         }
 
-        public static List<Property> GetSearchResultReturnProperties()
+        private static List<Property> GetGeneralSearchResultReturnProperties()
         {
             List<Property> ContainerProperties = new List<Property>();            
 
@@ -809,28 +840,28 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 
         }
 
-        public static List<Property> GetUserSearchResultProperties()
+        private static List<Property> GetUserSpecificSearchResultProperties()
         {
 
             List<Property> ContainerProperties = new List<Property>();
 
-            Property rank = new Property
-            {
-                Name = "rank",
-                MetaData = new MetaData("Rank", "Rank"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(rank);
+            //Property rank = new Property
+            //{
+            //    Name = "rank",
+            //    MetaData = new MetaData("Rank", "Rank"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(rank);
 
-            Property docid = new Property
-            {
-                Name = "docid",
-                MetaData = new MetaData("DocId", "DocId"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-                Type = "System.String"
-            };
-            ContainerProperties.Add(docid);
+            //Property docid = new Property
+            //{
+            //    Name = "docid",
+            //    MetaData = new MetaData("DocId", "DocId"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+            //    Type = "System.String"
+            //};
+            //ContainerProperties.Add(docid);
 
             Property aboutme = new Property
             {
@@ -895,14 +926,14 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             };
             ContainerProperties.Add(jobtitle);
 
-            Property lastmodifiedtime = new Property
-            {
-                Name = "lastmodifiedtime",
-                MetaData = new MetaData("LastModifiedTime", "LastModifiedTime"),
-                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.DateTime,
-                Type = "System.DateTime"
-            };
-            ContainerProperties.Add(lastmodifiedtime);
+            //Property lastmodifiedtime = new Property
+            //{
+            //    Name = "lastmodifiedtime",
+            //    MetaData = new MetaData("LastModifiedTime", "LastModifiedTime"),
+            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.DateTime,
+            //    Type = "System.DateTime"
+            //};
+            //ContainerProperties.Add(lastmodifiedtime);
 
             Property memberships = new Property
             {
@@ -1151,7 +1182,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             return ContainerProperties.OrderBy(p => p.MetaData.DisplayName).ToList();
         }
 
-        public static List<Property> GetGraphSearchResultProperties()
+        private static List<Property> GetGraphSearchResultProperties()
         {
             List<Property> ContainerProperties = new List<Property>();
 

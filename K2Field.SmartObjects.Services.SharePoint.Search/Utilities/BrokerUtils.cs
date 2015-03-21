@@ -106,7 +106,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Utilities
 
 
             string fileext = string.Empty;
-            var fileextprop = inputs.Where(p => p.Name.Equals("fileextensions", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+            var fileextprop = inputs.Where(p => p.Name.Equals("fileextensionsfilter", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
             if (fileextprop != null && fileextprop.Value != null && !string.IsNullOrWhiteSpace(fileextprop.Value.ToString()))
             {
                 InputValues.FileExtensions = new List<string>();

@@ -82,6 +82,8 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
         /// </summary>
         public void GetConfiguration()
         {
+            this.Configuration.AdvancedSearchOptions = bool.Parse(this.GetServiceConfigurationValue("AdvancedSearchOptions", false));
+
             //string serviceConfigurationValue = this.GetServiceConfigurationValue(Resources.TermStoreId, false);
             this._configuration.SiteUrl = this.GetServiceConfigurationValue(Resources.label_SiteUrl, true);
             //this._configuration.DescribeType = ServiceObjectHelper.DescribeType.Full;
@@ -168,6 +170,8 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             //this.serviceBroker.Service.ServiceConfiguration.Add(Resources.ExcludedFields, false, string.Empty);
             //this.serviceBroker.Service.ServiceConfiguration.Add(Resources.IncludedLists, false, string.Empty);
             //this.serviceBroker.Service.ServiceConfiguration.Add(Resources.ExcludedLists, false, string.Empty);
+
+            this.serviceBroker.Service.ServiceConfiguration.Add("AdvancedSearchOptions", true, "false");
         }
         #endregion
 
@@ -191,16 +195,12 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
         {
             TypeMappings map = GetTypeMappings();
 
-            //BlobContainer container = new BlobContainer(serviceBroker);
-            //container.Create();
-
-            //BlobBlob blob = new BlobBlob(serviceBroker);
-            //blob.Create();
-
             SPSearch search = new SPSearch(serviceBroker, Configuration);
             search.Create();
             SPSearchUser usersearch = new SPSearchUser(serviceBroker, Configuration);
             usersearch.Create();
+            SPSearchDocument documentsearch = new SPSearchDocument(serviceBroker, Configuration);
+            documentsearch.Create();
         }
 
         #endregion
@@ -284,7 +284,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             }
 
 
-            if (serviceObject.Methods[0].Name.Equals("spsearchusers"))
+            if (serviceObject.Methods[0].Name.Equals("spsearchusers") || serviceObject.Methods[0].Name.Equals("deserializeusersearchresults"))
             {
                 SPSearchUser spsearchuser = new SPSearchUser(serviceBroker, this.Configuration);
                 spsearchuser.ExecuteSearch(inputs, required, returns, methodType, serviceObject);
@@ -293,9 +293,21 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             if (serviceObject.Methods[0].Name.Equals("spsearchusersread"))
             {
                 SPSearchUser spsearchuser = new SPSearchUser(serviceBroker, this.Configuration);
-                spsearchuser.ExecuteSearch(inputs, required, returns, methodType, serviceObject);
+                spsearchuser.ExecuteSearchRead(inputs, required, returns, methodType, serviceObject);
             }
 
+
+            if (serviceObject.Methods[0].Name.Equals("spsearchdocuments") || serviceObject.Methods[0].Name.Equals("deserializedocumentsearchresults"))
+            {
+                SPSearchDocument spsearchdocumet = new SPSearchDocument(serviceBroker, this.Configuration);
+                spsearchdocumet.ExecuteSearch(inputs, required, returns, methodType, serviceObject);
+            }
+
+            if (serviceObject.Methods[0].Name.Equals("spsearchdocumentsread"))
+            {
+                SPSearchDocument spsearchdocumet = new SPSearchDocument(serviceBroker, this.Configuration);
+                spsearchdocumet.ExecuteSearchRead(inputs, required, returns, methodType, serviceObject);
+            }
         }
         #endregion
 

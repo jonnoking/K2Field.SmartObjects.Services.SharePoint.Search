@@ -14,12 +14,12 @@ using System.Globalization;
 
 namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 {
-    public class SPSearchUser
+    public class SPSearchDocument
     {
         private ServiceAssemblyBase serviceBroker = null;
         private Configuration Configuration { get; set; }
 
-        public SPSearchUser(ServiceAssemblyBase serviceBroker, Configuration configuration)
+        public SPSearchDocument(ServiceAssemblyBase serviceBroker, Configuration configuration)
         {
             // Set local serviceBroker variable.
             this.serviceBroker = serviceBroker;
@@ -35,8 +35,8 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             List<Property> SPSearchProps = GetSPSearchProperties();
 
             ServiceObject SPSearchServiceObject = new ServiceObject();
-            SPSearchServiceObject.Name = "spsearchuser";
-            SPSearchServiceObject.MetaData.DisplayName = "SharePoint User Search";
+            SPSearchServiceObject.Name = "spsearchdocument";
+            SPSearchServiceObject.MetaData.DisplayName = "SharePoint Document Search";
 
             SPSearchServiceObject.MetaData.ServiceProperties.Add("objecttype", "search");
 
@@ -80,7 +80,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             ReturnSummary = SPSearchProperties.GetSearchResultSummaryProperties();
             ContainerProperties.AddRange(ReturnSummary);
 
-            ReturnSearch = SPSearchProperties.GetUserSearchResultProperties();
+            ReturnSearch = SPSearchProperties.GetContentSearchResultsProperties();
             ContainerProperties.AddRange(ReturnSearch);
 
             ReturnStatus = StandardReturns.GetStandardReturnProperties();
@@ -92,13 +92,18 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
         private Method CreateSearch(List<Property> SPSearchProps)
         {
             Method Search = new Method();
-            Search.Name = "spsearchusers";
-            Search.MetaData.DisplayName = "Search Users";
+            Search.Name = "spsearchdocuments";
+            Search.MetaData.DisplayName = "Search Documents";
             Search.Type = MethodType.List;
 
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
             Search.Validation.RequiredProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "searchsiteurl").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "fileextensionsfilter").First());
+
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "sort").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "sourceid").First());
+
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "startrow").First());
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "rowlimit").First());
 
@@ -166,14 +171,17 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
         private Method CreateSearchRead(List<Property> SPSearchProps)
         {
             Method Search = new Method();
-            Search.Name = "spsearchusersread";
-            Search.MetaData.DisplayName = "Search Users Read";
+            Search.Name = "spsearchdocumentsread";
+            Search.MetaData.DisplayName = "Search Documents Read";
             Search.Type = MethodType.Read;
 
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
             Search.Validation.RequiredProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "searchsiteurl").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "fileextensionsfilter").First());
 
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "sort").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "sourceid").First());
 
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "startrow").First());
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "rowlimit").First());
@@ -232,8 +240,8 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
         private Method CreateDeserializeSearchResults(List<Property> SPSearchProps)
         {
             Method Search = new Method();
-            Search.Name = "deserializeusersearchresults";
-            Search.MetaData.DisplayName = "Deserialize User Search Results";
+            Search.Name = "deserializedocumentsearchresults";
+            Search.MetaData.DisplayName = "Deserialize Document Search Results";
             Search.Type = MethodType.List;
 
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "serializedresults").First());
@@ -295,7 +303,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 
             return Search;
         }
-        
+
         #endregion Describe
 
 
@@ -312,7 +320,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             SPExecute Excute = new SPExecute(this.serviceBroker, this.Configuration);
             Excute.ExecuteSearchRead(inputs, required, returns, methodType, serviceObject);
         }
-       
+
         #endregion Execute
 
     }
