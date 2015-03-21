@@ -36,6 +36,9 @@ Examples
 http://blogs.msdn.com/b/nadeemis/archive/2012/08/24/sharepoint-2013-search-rest-api.aspx
 http://www.tikalk.com/net/sharepoint-2013-rest-api-%E2%80%93-search-service/
 
+jonathan+skills:Slide
+
+
 
 limit to a site
 http://localhost/_api/search/query?querytext='test+path:"http://localhost/subsite/"'

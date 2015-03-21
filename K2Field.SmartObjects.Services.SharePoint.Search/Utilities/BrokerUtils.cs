@@ -487,7 +487,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Utilities
 
                 SerializedResults.ExecutionTime = res.ElapsedTime;
 
-                if (res.PrimaryQueryResult != null && res.PrimaryQueryResult.RefinementResults != null)
+                if (res.PrimaryQueryResult != null && res.PrimaryQueryResult.RelevantResults != null)
                 {
                     SerializedResults.TotalRows = res.PrimaryQueryResult.RelevantResults.TotalRows;
 
