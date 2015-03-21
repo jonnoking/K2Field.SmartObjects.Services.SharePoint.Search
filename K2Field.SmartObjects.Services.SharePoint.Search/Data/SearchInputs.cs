@@ -18,7 +18,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 
         public string Site { get; set; } // to limit scope
         public string SiteUrl { get; set; }
-
+        public string Properties { get; set; }
         public int? StartRow { get; set; }
         public int? RowLimit { get; set; }
         public string SortString { get; set; }

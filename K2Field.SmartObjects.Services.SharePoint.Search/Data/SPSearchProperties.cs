@@ -32,6 +32,15 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             };
             ContainerProperties.Add(searchsite);
 
+            Property properties = new Property
+            {
+                Name = "properties",
+                MetaData = new MetaData("Properties", "Properties"),
+                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+                Type = "System.String"
+            };
+            ContainerProperties.Add(properties);
+
             Property startrow = new Property
             {
                 Name = "startrow",
@@ -240,6 +249,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 
             ContainerProperties.AddRange(GetStandardSearchReturnProperties());
             ContainerProperties.AddRange(GetSearchResultReturnProperties());
+            ContainerProperties.AddRange(GetGraphSearchResultProperties());
 
             return ContainerProperties.OrderBy(p => p.MetaData.DisplayName).ToList();
         }
@@ -381,14 +391,14 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             };
             ContainerProperties.Add(hithighlightedproperties);
 
-            //Property contentclass = new Property
-            //{
-            //    Name = "contentclass",
-            //    MetaData = new MetaData("contentclass", "contentclass"),
-            //    SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
-            //    Type = "System.String"
-            //};
-            //ContainerProperties.Add(contentclass);
+            Property contentclass = new Property
+            {
+                Name = "contentclass",
+                MetaData = new MetaData("contentclass", "contentclass"),
+                SoType = SourceCode.SmartObjects.Services.ServiceSDK.Types.SoType.Text,
+                Type = "System.String"
+            };
+            ContainerProperties.Add(contentclass);
 
             Property picturethumbnailurl = new Property
             {

@@ -53,6 +53,8 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             SPSearchServiceObject.Methods.Add(CreateSearch(SPSearchProps));
             SPSearchServiceObject.Methods.Add(CreateSearchRead(SPSearchProps));
             SPSearchServiceObject.Methods.Add(CreateDeserializeSearchResults(SPSearchProps));
+            SPSearchServiceObject.Methods.Add(CreateSearchRaw(SPSearchProps));
+            SPSearchServiceObject.Methods.Add(CreateSearchRawRead(SPSearchProps));
             SPSearchServiceObject.Methods.Add(CreateListSourceIds(SPSearchProps));
             SPSearchServiceObject.Methods.Add(CreateListOtherSourceIds(SPSearchProps));
 
@@ -88,8 +90,10 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "sourceid").First());
 
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "startrow").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "rowlimit").First()); 
-            
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "rowlimit").First());
+
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "properties").First());
+
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "enablestemming").First());
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "trimduplicates").First());
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "enablequeryrules").First());
@@ -130,8 +134,10 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "sourceid").First());
 
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "startrow").First());
-            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "rowlimit").First()); 
-            
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "rowlimit").First());
+
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "properties").First());
+
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "enablestemming").First());
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "trimduplicates").First());
             Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "enablequeryrules").First());
@@ -150,6 +156,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
             Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "startrow").First());
             Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "rowlimit").First());
 
+            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "properties").First());
             Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "enablestemming").First());
             Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "trimduplicates").First());
             Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "enablequeryrules").First());
@@ -172,6 +179,66 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 
             return Search;
         }
+
+        private Method CreateSearchRaw(List<Property> SPSearchProps)
+        {
+            Method Search = new Method();
+            Search.Name = "spsearchraw";
+            Search.MetaData.DisplayName = "Search Raw";
+            Search.Type = MethodType.List;
+
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
+            Search.Validation.RequiredProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
+
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "startrow").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "rowlimit").First()); 
+
+            foreach (Property prop in SPSearchProps)
+            {
+                if (!Search.ReturnProperties.Contains(prop.Name))
+                {
+                    Search.ReturnProperties.Add(prop);
+                }
+            }
+            if (Search.ReturnProperties.Contains("serializedresults"))
+            {
+                Search.ReturnProperties.Remove("serializedresults");
+            }
+
+            return Search;
+        }
+
+        private Method CreateSearchRawRead(List<Property> SPSearchProps)
+        {
+            Method Search = new Method();
+            Search.Name = "spsearchrawread";
+            Search.MetaData.DisplayName = "Search Raw Read";
+            Search.Type = MethodType.Read;
+
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
+            Search.Validation.RequiredProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
+
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "startrow").First());
+            Search.InputProperties.Add(SPSearchProps.Where(p => p.Name == "rowlimit").First()); 
+
+            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "search").First());
+            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "startrow").First());
+            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "rowlimit").First()); 
+
+            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "executiontime").First());
+            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "resultrows").First());
+            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "totalrows").First());
+            //Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "tabletype").First());
+            //Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "resulttitle").First());
+            //Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "resulttitleurl").First());
+            //Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "spellingsuggestions").First());
+            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "serializedresults").First());
+            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "responsestatus").First());
+            Search.ReturnProperties.Add(SPSearchProps.Where(p => p.Name == "responsestatusdescription").First());
+
+            return Search;
+        }
+
 
         private Method CreateDeserializeSearchResults(List<Property> SPSearchProps)
         {
@@ -238,9 +305,11 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                 RESTSearchResultsSerialized SerializedResults = null;
 
                 // if deserializesearchresults
-                var sps = inputs.Where(p => p.Name.Equals("serializedresults", StringComparison.OrdinalIgnoreCase));
-                if (sps.Count() > 0 && inputs.Where(p => p.Name.Equals("serializedresults", StringComparison.OrdinalIgnoreCase)).First() != null && inputs.Where(p => p.Name.Equals("serializedresults", StringComparison.OrdinalIgnoreCase)).First().Value != null)
-                {
+                if(serviceObject.Methods[0].Name.Equals("deserializesearchresults"))
+                { 
+                //var sps = inputs.Where(p => p.Name.Equals("serializedresults", StringComparison.OrdinalIgnoreCase));
+                //if (sps.Count() > 0 && inputs.Where(p => p.Name.Equals("serializedresults", StringComparison.OrdinalIgnoreCase)).First() != null && inputs.Where(p => p.Name.Equals("serializedresults", StringComparison.OrdinalIgnoreCase)).First().Value != null)
+                //{
                     Property SerializedProp = inputs.Where(p => p.Name.Equals("serializedresults", StringComparison.OrdinalIgnoreCase)).First();
                     //if (SerializedProp != null && SerializedProp.Value != null)
                     //{
@@ -257,11 +326,19 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                     }
                     //}
                 }
-                else
+
+                if (serviceObject.Methods[0].Name.Equals("spsearch"))
                 {
                     // if Search
                     SerializedResults = Utilities.BrokerUtils.ExecuteSharePointSearch(inputs, required, Configuration, serviceBroker);
                 }
+
+                if (serviceObject.Methods[0].Name.Equals("spsearchraw"))
+                {
+                    // if Search Raw Read
+                    SerializedResults = Utilities.BrokerUtils.ExecuteSharePointSearchRaw(inputs, required, Configuration, serviceBroker);
+                }
+
 
                 if (SerializedResults != null)
                 {
@@ -275,6 +352,26 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                             dr["search"] = SerializedResults.Inputs.Search;
                         }
 
+                        if (!string.IsNullOrWhiteSpace(SerializedResults.Inputs.SiteUrl))
+                        {
+                            dr["searchsiteurl"] = SerializedResults.Inputs.Search;
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(SerializedResults.Inputs.FileExtensionsString))
+                        {
+                            dr["fileextensions"] = SerializedResults.Inputs.FileExtensionsString;
+                        }
+
+                        if (SerializedResults.Inputs.SourceId != null && SerializedResults.Inputs.SourceId != Guid.Empty)
+                        {                            
+                            dr["sourceid"] = SerializedResults.Inputs.SourceId;                            
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(SerializedResults.Inputs.SortString))
+                        {
+                            dr["sort"] = SerializedResults.Inputs.SortString;
+                        }
+
                         if (SerializedResults.Inputs.StartRow.HasValue && SerializedResults.Inputs.StartRow.Value > -1)
                         {
                             dr["startrow"] = SerializedResults.Inputs.StartRow.Value;
@@ -285,14 +382,34 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                             dr["rowlimit"] = SerializedResults.Inputs.RowLimit.Value;
                         }
 
-                        if (SerializedResults.Inputs.SourceId != null && SerializedResults.Inputs.SourceId != Guid.Empty)
+                        if (!string.IsNullOrWhiteSpace(SerializedResults.Inputs.Properties))
                         {
-                            dr["sourceid"] = SerializedResults.Inputs.SourceId;
+                            dr["properties"] = SerializedResults.Inputs.Properties;
                         }
 
-                        if (!string.IsNullOrWhiteSpace(SerializedResults.Inputs.SortString))
+                        if (SerializedResults.Inputs.EnableStemming.HasValue && SerializedResults.Inputs.EnableStemming.Value)
                         {
-                            dr["sort"] = SerializedResults.Inputs.SortString;
+                            dr["enablestemming"] = SerializedResults.Inputs.EnableStemming.Value;
+                        }
+
+                        if (SerializedResults.Inputs.TrimDuplicates.HasValue && SerializedResults.Inputs.TrimDuplicates.Value)
+                        {
+                            dr["trimduplicates"] = SerializedResults.Inputs.TrimDuplicates.Value;
+                        }
+
+                        if (SerializedResults.Inputs.EnableQueryRules.HasValue && SerializedResults.Inputs.EnableQueryRules.Value)
+                        {
+                            dr["enablequeryrules"] = SerializedResults.Inputs.EnableQueryRules.Value;
+                        }
+
+                        if (SerializedResults.Inputs.ProcessBestBets.HasValue && SerializedResults.Inputs.ProcessBestBets.Value)
+                        {
+                            dr["processbestbets"] = SerializedResults.Inputs.ProcessBestBets.Value;
+                        }
+
+                        if (SerializedResults.Inputs.ProcessPersonal.HasValue && SerializedResults.Inputs.ProcessPersonal.Value)
+                        {
+                            dr["processpersonal"] = SerializedResults.Inputs.ProcessPersonal.Value;
                         }
 
                         if (SerializedResults.Inputs.EnableNicknames.HasValue && SerializedResults.Inputs.EnableNicknames.Value)
@@ -304,11 +421,10 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                         {
                             dr["enablephonetic"] = SerializedResults.Inputs.EnablePhonetic.Value;
                         }
-
+                        
                         if (SerializedResults.ExecutionTime.HasValue)
                         {
-                            dr["executiontime"] = SerializedResults.ExecutionTime.Value;
-                            
+                            dr["executiontime"] = SerializedResults.ExecutionTime.Value;                            
                         }
 
                         if (SerializedResults.ResultRows.HasValue)
@@ -371,7 +487,15 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                 //SearchInputs SearchInputs = GetInputs(inputs);
                 RESTSearchResultsSerialized SerializedResults = new RESTSearchResultsSerialized();
 
-                SerializedResults = Utilities.BrokerUtils.ExecuteSharePointSearch(inputs, required, Configuration, serviceBroker);
+                if (serviceObject.Methods[0].Name.Equals("spsearchread"))
+                {
+                    SerializedResults = Utilities.BrokerUtils.ExecuteSharePointSearch(inputs, required, Configuration, serviceBroker);
+                }
+
+                if (serviceObject.Methods[0].Name.Equals("spsearchrawread"))
+                {
+                    SerializedResults = Utilities.BrokerUtils.ExecuteSharePointSearchRaw(inputs, required, Configuration, serviceBroker);
+                }
 
                 if (SerializedResults != null)
                 {
@@ -379,7 +503,27 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                     {
                         returns.Where(p => p.Name.Equals("search", StringComparison.OrdinalIgnoreCase)).First().Value = SerializedResults.Inputs.Search;
                     }
+                    
+                    if (!string.IsNullOrWhiteSpace(SerializedResults.Inputs.SiteUrl))
+                    {
+                        returns.Where(p => p.Name.Equals("searchsiteurl", StringComparison.OrdinalIgnoreCase)).First().Value = SerializedResults.Inputs.Search;
+                    }
+                    
+                    if (!string.IsNullOrWhiteSpace(SerializedResults.Inputs.FileExtensionsString))
+                    {
+                        returns.Where(p => p.Name.Equals("fileextensions", StringComparison.OrdinalIgnoreCase)).First().Value = SerializedResults.Inputs.FileExtensionsString;
+                    }
 
+                    if (SerializedResults.Inputs.SourceId != null && SerializedResults.Inputs.SourceId != Guid.Empty)
+                    {
+                        returns.Where(p => p.Name.Equals("sourceid", StringComparison.OrdinalIgnoreCase)).First().Value = SerializedResults.Inputs.SourceId;
+                    }
+                    
+                    if (!string.IsNullOrWhiteSpace(SerializedResults.Inputs.SortString))
+                    {
+                        returns.Where(p => p.Name.Equals("sort", StringComparison.OrdinalIgnoreCase)).First().Value = SerializedResults.Inputs.SortString;
+                    }
+                    
                     if (SerializedResults.Inputs.StartRow.HasValue && SerializedResults.Inputs.StartRow.Value > -1)
                     {
                         returns.Where(p => p.Name.Equals("startrow", StringComparison.OrdinalIgnoreCase)).First().Value = SerializedResults.Inputs.StartRow.Value;
@@ -390,22 +534,12 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
                         returns.Where(p => p.Name.Equals("rowlimit", StringComparison.OrdinalIgnoreCase)).First().Value = SerializedResults.Inputs.RowLimit.Value;
                     }
 
-                    if (SerializedResults.Inputs.SourceId != null && SerializedResults.Inputs.SourceId != Guid.Empty)
+                    if (!string.IsNullOrWhiteSpace(SerializedResults.Inputs.Properties))
                     {
-                        returns.Where(p => p.Name.Equals("sourceid", StringComparison.OrdinalIgnoreCase)).First().Value = SerializedResults.Inputs.SourceId;
-                    }
-
-                    if (!string.IsNullOrWhiteSpace(SerializedResults.Inputs.SortString))
-                    {
-                        returns.Where(p => p.Name.Equals("sort", StringComparison.OrdinalIgnoreCase)).First().Value = SerializedResults.Inputs.SortString;
+                        returns.Where(p => p.Name.Equals("properties", StringComparison.OrdinalIgnoreCase)).First().Value = SerializedResults.Inputs.Properties;
                     }
                     // for testing
                     //returns.Where(p => p.Name.Equals("sort", StringComparison.OrdinalIgnoreCase)).First().Value = Utilities.BrokerUtils.GetColumns(SerializedResults);
-
-                    if (!string.IsNullOrWhiteSpace(SerializedResults.Inputs.FileExtensionsString))
-                    {
-                        returns.Where(p => p.Name.Equals("fileextensions", StringComparison.OrdinalIgnoreCase)).First().Value = SerializedResults.Inputs.FileExtensionsString;
-                    }
 
                     if (SerializedResults.Inputs.EnableStemming.HasValue)
                     {

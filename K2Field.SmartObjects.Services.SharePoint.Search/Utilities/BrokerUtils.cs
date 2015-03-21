@@ -46,6 +46,14 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Utilities
             //}
 
 
+            string properties = string.Empty;
+            var propertiesprop = inputs.Where(p => p.Name.Equals("properties", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+            if (propertiesprop != null && propertiesprop.Value != null && !string.IsNullOrWhiteSpace(propertiesprop.Value.ToString()))
+            {
+                properties = propertiesprop.Value.ToString();
+                InputValues.Properties = properties;
+            }
+
             int startRow = -1;
             var startRowProp = inputs.Where(p => p.Name.Equals("startrow", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
             if (startRowProp != null && startRowProp.Value != null && !string.IsNullOrWhiteSpace(startRowProp.Value.ToString()))
@@ -290,6 +298,11 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Utilities
                 SearchQuery += "&sortlist='" + Inputs.SortString + "'";
             }
 
+            if (!string.IsNullOrWhiteSpace(Inputs.Properties))
+            {
+                SearchQuery += "&Properties='" + Inputs.Properties + "'";
+            }
+
             if (Inputs.FileExtensions != null && Inputs.FileExtensions.Count > 0)
             {
                 //&refiners='filetype'
@@ -430,6 +443,26 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Utilities
             SearchInputs SearchInputs = Utilities.BrokerUtils.GetInputs(inputs);
             return ExecuteSearch(SearchInputs, Configuration, serviceBroker);
         }
+        public static RESTSearchResultsSerialized ExecuteSharePointSearchRaw(Property[] inputs, RequiredProperties required, Configuration Configuration, ServiceAssemblyBase serviceBroker)
+        {
+            // Raw search = append input to end of querytext
+            SearchInputs SearchInputs = new SearchInputs();
+            string search = string.Empty;
+            var searchProp = inputs.Where(p => p.Name.Equals("search", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+            if (searchProp != null && searchProp.Value != null && !string.IsNullOrWhiteSpace(searchProp.Value.ToString()))
+            {
+                search = searchProp.Value.ToString();
+                SearchInputs.Search = search;
+            }
+            else
+            {
+                throw new Exception("Search is a required property");
+            }
+
+            string RequestUri = Configuration.SiteUrl + "/_api/search/query?querytext=" + search;
+
+            return ProcessResults(ExecuteRESTRequest(RequestUri, serviceBroker), SearchInputs);
+        }
 
         public static RESTSearchResultsSerialized ExecuteSharePointUserSearch(Property[] inputs, RequiredProperties required, Configuration Configuration, ServiceAssemblyBase serviceBroker)
         {
@@ -441,10 +474,10 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Utilities
         {
             RESTSearchResults res = Utilities.BrokerUtils.ExecuteRESTRequest(Utilities.BrokerUtils.BuildSearchText(inputs, Configuration), serviceBroker);
 
-            return ProcessResuls(res, inputs);
+            return ProcessResults(res, inputs);
         }
 
-        public static RESTSearchResultsSerialized ProcessResuls(RESTSearchResults res, SearchInputs inputs)
+        public static RESTSearchResultsSerialized ProcessResults(RESTSearchResults res, SearchInputs inputs)
         {
             RESTSearchResultsSerialized SerializedResults = new RESTSearchResultsSerialized();
             SerializedResults.Inputs = inputs;

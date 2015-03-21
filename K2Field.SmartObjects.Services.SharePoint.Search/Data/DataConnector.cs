@@ -259,22 +259,16 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
         {
             this.GetConfiguration();
 
-            if (serviceObject.Methods[0].Name.Equals("spsearch"))
+            if (serviceObject.Methods[0].Name.Equals("spsearch") || serviceObject.Methods[0].Name.Equals("spsearchraw") || serviceObject.Methods[0].Name.Equals("deserializesearchresults"))
             {
                 SPSearch spsearch = new SPSearch(serviceBroker, this.Configuration);
                 spsearch.ExecuteSearch(inputs, required, returns, methodType, serviceObject);
             }
 
-            if (serviceObject.Methods[0].Name.Equals("spsearchread"))
+            if (serviceObject.Methods[0].Name.Equals("spsearchread") || serviceObject.Methods[0].Name.Equals("spsearchrawread"))
             {
                 SPSearch spsearch = new SPSearch(serviceBroker, this.Configuration);
                 spsearch.ExecuteSearchRead(inputs, required, returns, methodType, serviceObject);
-            }
-
-            if (serviceObject.Methods[0].Name.Equals("deserializesearchresults"))
-            {
-                SPSearch spsearch = new SPSearch(serviceBroker, this.Configuration);
-                spsearch.ExecuteSearch(inputs, required, returns, methodType, serviceObject);
             }
 
             if (serviceObject.Methods[0].Name.Equals("listsourceidsstatic"))
