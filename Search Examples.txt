@@ -1,0 +1,52 @@
+
+-- Office Graph --
+
+https://msdn.microsoft.com/en-us/office/office365/howto/query-Office-graph-using-gql-with-search-rest-api
+
+
+http://blogs.msdn.com/b/richard_dizeregas_blog/archive/2014/09/15/developing-apps-against-the-office-graph.aspx
+
+//People for whom the current worker works with sorted by closeness
+/_api/search/query?Querytext='*'&Properties='GraphQuery:ACTOR(ME\, action\:1019),GraphRankingModel:{"features"\:[{"function"\:"EdgeWeight"}]}'&RankingModelId='0c77ded8-c3ef-466d-929d-905670ea1d72'
+
+//Objects related to current user (ie - ME)
+/_api/search/query?Querytext='*'&Properties='GraphQuery:ACTOR(ME)'
+
+//Objects related to actor 342
+/_api/search/query?Querytext='*'&Properties='GraphQuery:ACTOR(342)'
+
+//Objects trending around current user (trending = action type 1020)
+/_api/search/query?Querytext='*'&Properties='GraphQuery:ACTOR(ME\, action\:1020)'
+
+//Objects related to current user and actor 342
+/_api/search/query?Querytext='*'&Properties='GraphQuery:AND(ACTOR(ME)\, ACTOR(342))'
+
+//Objects recently viewed by current user and modified by actor 342
+/_api/search/query?Querytext='*'&Properties='GraphQuery:AND(ACTOR(ME\, action\:1001)\, ACTOR(342\, action\:1003))'
+
+//People for whom the current worker works with
+/_api/search/query?Querytext='*'&Properties='GraphQuery:ACTOR(ME\, action\:1019)'
+
+//Objects related to actor 342 with 'Delve' in the title
+/_api/search/query?Querytext='Title:Delve'&Properties='GraphQuery:ACTOR(342)'
+
+
+-- SharePoint Search --
+Examples
+http://blogs.msdn.com/b/nadeemis/archive/2012/08/24/sharepoint-2013-search-rest-api.aspx
+http://www.tikalk.com/net/sharepoint-2013-rest-api-%E2%80%93-search-service/
+
+
+limit to a site
+http://localhost/_api/search/query?querytext='test+path:"http://localhost/subsite/"'
+
+
+KQL
+https://msdn.microsoft.com/EN-US/library/office/ee558911.aspx
+
+FQL
+https://msdn.microsoft.com/en-us/library/office/ff394606(v=office.15).aspx
+
+
+SharePoint Search REST API
+https://msdn.microsoft.com/en-us/library/office/jj163876.aspx

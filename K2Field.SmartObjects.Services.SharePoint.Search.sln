@@ -1,7 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "K2Field.SmartObjects.Services.SharePoint.Search", "K2Field.SmartObjects.Services.SharePoint.Search\K2Field.SmartObjects.Services.SharePoint.Search.csproj", "{7B348986-F786-46BF-84F6-07484D02EA3B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{901E9FE8-6983-472B-8297-84716B456586}"
+	ProjectSection(SolutionItems) = preProject
+		Search Examples.txt = Search Examples.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

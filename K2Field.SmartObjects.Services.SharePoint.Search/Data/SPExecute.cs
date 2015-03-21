@@ -70,7 +70,13 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 
                 if (SerializedResults != null)
                 {
-                    // needs updating for REST
+                    if (SerializedResults.SearchResults == null || SerializedResults.SearchResults.Rows == null)
+                    {
+                        SerializedResults.SearchResults = new ResultTable();
+
+                        //SerializedResults.SearchResults.Rows.Add(new ResultRow());
+                    }
+                    
                     foreach (ResultRow result in SerializedResults.SearchResults.Rows)
                     {
                         dr = serviceBroker.ServicePackage.ResultTable.NewRow();

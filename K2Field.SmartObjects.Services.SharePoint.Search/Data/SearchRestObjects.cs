@@ -17,7 +17,7 @@ public class RESTSearchResults
 public string odatametadata { get; set; }
 public int ElapsedTime { get; set; }
 public PrimaryQueryResult PrimaryQueryResult { get; set; }
-public SearchProperty[] Properties { get; set; }
+public List<SearchProperty> Properties { get; set; }
 public object[] SecondaryQueryResults { get; set; }
 public string SpellingSuggestion { get; set; }
 public object[] TriggeredRules { get; set; }
@@ -35,9 +35,13 @@ public object SpecialTermResults { get; set; }
 
 public class RelevantResults
 {
+    public RelevantResults()
+    {
+        Table = new ResultTable();
+    }
 public object GroupTemplateId { get; set; }
 public object ItemTemplateId { get; set; }
-public SearchProperty[] Properties { get; set; }
+public List<SearchProperty> Properties { get; set; }
 public string ResultTitle { get; set; }
 public string ResultTitleUrl { get; set; }
 public int RowCount { get; set; }
@@ -48,12 +52,20 @@ public int TotalRowsIncludingDuplicates { get; set; }
 
 public class ResultTable
 {
-public ResultRow[] Rows { get; set; }
+    public ResultTable()
+    {
+        Rows = new List<ResultRow>();
+    }
+    public List<ResultRow> Rows { get; set; }
 }
 
 public class ResultRow
 {
-public ResultCell[] Cells { get; set; }
+    public ResultRow()
+    {
+        Cells = new List<ResultCell>();
+    }
+    public List<ResultCell> Cells { get; set; }
 }
 
 public class ResultCell

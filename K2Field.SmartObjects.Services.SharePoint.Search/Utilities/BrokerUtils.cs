@@ -252,7 +252,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Utilities
             foreach (ResultCell cell in results.SearchResults.Rows[0].Cells.OrderBy(p => p.Key))
             {
                 cols += cell.Key + " (" + cell.ValueType + ")";
-                if (i <= results.SearchResults.Rows.Length - 2)
+                if (i <= results.SearchResults.Rows.Count - 2)
                 {
                     cols += ",";
                 }
@@ -487,15 +487,25 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Utilities
 
                 SerializedResults.ExecutionTime = res.ElapsedTime;
 
-                SerializedResults.TotalRows = res.PrimaryQueryResult.RelevantResults.TotalRows;
+                if (res.PrimaryQueryResult != null && res.PrimaryQueryResult.RefinementResults != null)
+                {
+                    SerializedResults.TotalRows = res.PrimaryQueryResult.RelevantResults.TotalRows;
 
-                SerializedResults.ResultRows = res.PrimaryQueryResult.RelevantResults.RowCount;
+                    SerializedResults.ResultRows = res.PrimaryQueryResult.RelevantResults.RowCount;
 
-                SerializedResults.ResultTitle = res.PrimaryQueryResult.RelevantResults.ResultTitle;
-                SerializedResults.ResultTitleUrl = res.PrimaryQueryResult.RelevantResults.ResultTitleUrl;
+                    SerializedResults.ResultTitle = res.PrimaryQueryResult.RelevantResults.ResultTitle;
+                    SerializedResults.SearchResults = res.PrimaryQueryResult.RelevantResults.Table;
+                    SerializedResults.ResultTitleUrl = res.PrimaryQueryResult.RelevantResults.ResultTitleUrl;
+                }
+                else
+                {
+                    SerializedResults.TotalRows = 0;
+
+                    SerializedResults.ResultRows = 0;
+                }
+
                 SerializedResults.SpellingSuggestions = res.SpellingSuggestion;
 
-                SerializedResults.SearchResults = res.PrimaryQueryResult.RelevantResults.Table;
 
                 // set SourceId from execution results
                 Guid sid = Guid.Empty;
