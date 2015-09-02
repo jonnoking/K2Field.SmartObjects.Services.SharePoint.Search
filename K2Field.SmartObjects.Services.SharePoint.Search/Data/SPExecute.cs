@@ -241,7 +241,7 @@ namespace K2Field.SmartObjects.Services.SharePoint.Search.Data
 
                     if (!string.IsNullOrWhiteSpace(SerializedResults.Inputs.SiteUrl))
                     {
-                        returns.Where(p => p.Name.Equals("searchsiteurl", StringComparison.OrdinalIgnoreCase)).First().Value = SerializedResults.Inputs.Search;
+                        returns.Where(p => p.Name.Equals("searchsiteurl", StringComparison.OrdinalIgnoreCase)).First().Value = SerializedResults.Inputs.SiteUrl;
                     }
 
                     if (!string.IsNullOrWhiteSpace(SerializedResults.Inputs.FileExtensionsString))
